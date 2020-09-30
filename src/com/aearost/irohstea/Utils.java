@@ -1,8 +1,10 @@
 package com.aearost.irohstea;
 
+import java.util.ListIterator;
+
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class Utils {
 	
@@ -18,4 +20,13 @@ public class Utils {
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
 	
+	public static boolean hasInventorySpace(Player player)
+	{
+	    return player.getInventory().firstEmpty() != -1;
+	}
+	
+	public static boolean isMatchingItemStack(ItemStack inventoryItem, ItemStack itemToAdd) {
+		return (inventoryItem.getItemMeta().getLore().get(0).equals(itemToAdd.getItemMeta().getLore().get(0)) &&
+				inventoryItem.getItemMeta().getDisplayName().equals(itemToAdd.getItemMeta().getDisplayName()));
+	}
 }

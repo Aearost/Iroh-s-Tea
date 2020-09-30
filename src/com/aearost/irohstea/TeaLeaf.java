@@ -7,17 +7,26 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class TeaLeaf {
-
+	
 	public static ItemStack getTeaLeaf() {
 		ItemStack tea = new ItemStack(Material.KELP, 1);
 		ItemMeta meta = tea.getItemMeta();
 		ArrayList<String> s = new ArrayList<>();
-		meta.setDisplayName(Utils.chat("&2&lTea Leaf"));
-		String lore = "&a&oThe base of it all";
-	    s.add(Utils.chat(lore));
+		
+		meta.setDisplayName(Utils.chat(getName()));
+	    s.add(Utils.chat(getLore()));
 	    meta.setLore(s);
 	    tea.setItemMeta(meta);
+	    
 	    return tea;
+	}
+	
+	public static String getName() {
+		return "&2&lTea Leaf";
+	}
+	
+	public static String getLore() {
+		return "&a&oThe base of it all";
 	}
 	
 }
