@@ -13,8 +13,8 @@ public class TeaLeaf {
 		ItemMeta meta = tea.getItemMeta();
 		ArrayList<String> s = new ArrayList<>();
 		
-		meta.setDisplayName(Utils.chat(getName()));
-	    s.add(Utils.chat(getLore()));
+		meta.setDisplayName(Utils.translateToColor(getName()));
+	    s.add(Utils.translateToColor(getLore()));
 	    meta.setLore(s);
 	    tea.setItemMeta(meta);
 	    

@@ -8,7 +8,15 @@ import org.bukkit.inventory.ItemStack;
 
 public class Utils {
 	
-	public final static String PREFIX = Utils.chat("&2[&aIroh's Teas&2] &r");
+	/**
+	 * Allows the formatting of messages to contain Minecraft colors
+	 * 
+	 * @param msg
+	 * @return
+	 */
+	public static String chatMessage(String msg) {
+		return ChatColor.translateAlternateColorCodes('&', "&2[&aIroh's Teas&2] &r" + msg);
+	}
 	
 	/**
 	 * Allows the formatting of messages to contain Minecraft colors
@@ -16,7 +24,7 @@ public class Utils {
 	 * @param msg
 	 * @return
 	 */
-	public static String chat(String msg) {
+	public static String translateToColor(String msg) {
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
 	
