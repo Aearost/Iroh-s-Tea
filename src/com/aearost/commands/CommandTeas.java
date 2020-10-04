@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.aearost.irohstea.Items;
 import com.aearost.irohstea.TeaLeaf;
 import com.aearost.irohstea.Utils;
 
@@ -15,19 +16,31 @@ public class CommandTeas implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
-			sender.sendMessage(Utils.chatMessage("&fYou're missing parameters!"));
+			sender.sendMessage(Utils.translateToColor("&a         - - &2&lIroh's Teas &a- -"));
+			sender.sendMessage(Utils.translateToColor("&6/teas &egive <player> <item> &7[amount]"));
+			return false;
+		} else if (args.length < 3) {
+			sender.sendMessage(Utils.translateToColor("&aProper Usage: &6/teas &egive <player> <item> &7[amount]"));
 			return false;
 		}
 
 		if (args.length >= 3 && args[0].equals("give")) {
 			Player target = Bukkit.getPlayer(args[1]);
-			if (args[2].equals("TEA_LEAF")) {
+			// If the input item does not exist
+			for (Items i : Items.values()) {
+				if (!i.name().equals(args[2])) {
+					sender.sendMessage(Utils.chatMessage("&7" + args[2] + " &cdoes not exist!"));
+					return false;
+				}
+			}
+			
+			if (args[2].equals(Items.TEA_LEAF.name())) {
 				if (args.length == 4) {
 					int amount;
 					try {
 						amount = Integer.parseInt(args[3]);
 					} catch (NumberFormatException e) {
-						sender.sendMessage(Utils.chatMessage("&eYou must enter a valid quantity!"));
+						sender.sendMessage(Utils.chatMessage("&cThat is not a valid amount!"));
 						return false;
 					}
 					// In valid inventory slot range

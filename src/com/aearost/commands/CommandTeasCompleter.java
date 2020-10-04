@@ -9,6 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import com.aearost.irohstea.Items;
+
 public class CommandTeasCompleter implements TabCompleter {
 
 	@Override
@@ -30,9 +32,19 @@ public class CommandTeasCompleter implements TabCompleter {
 				}
 			}
 		}
-		// If the inputted player exists
+		// If the input player exists
 		else if (args.length == 3 && args[0].equals("give") && Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1]))) {
-			displayedOptions.add("TEA_LEAF");
+			for (Items i : Items.values()) {
+				if (i.name().toLowerCase().startsWith(args[2].toLowerCase())) {
+					displayedOptions.add(i.name());
+				}
+			}
+		}
+		// Prompts amount but clears once something is entered
+		else if (args.length == 4) {
+			if (args[3].equals("")) {
+				displayedOptions.add("64");
+			}
 		}
 		return displayedOptions;
 	}
