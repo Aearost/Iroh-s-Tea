@@ -25,7 +25,9 @@ public class CommandTeasCompleter implements TabCompleter {
 			Player[] onlinePlayers = new Player[Bukkit.getOnlinePlayers().size()];
 			Bukkit.getOnlinePlayers().toArray(onlinePlayers);
 			for (int i = 0; i < onlinePlayers.length; i++) {
-				displayedOptions.add(onlinePlayers[i].getName());
+				if (onlinePlayers[i].getName().toLowerCase().startsWith(args[1].toLowerCase())) {
+					displayedOptions.add(onlinePlayers[i].getName());
+				}
 			}
 		}
 		// If the inputted player exists
