@@ -1,12 +1,33 @@
 package com.aearost.irohstea;
 
+import java.util.HashMap;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.aearost.items.GreenTea;
+import com.aearost.items.GreenTeaBag;
+import com.aearost.items.TeaLeaf;
+
 public class Utils {
 	
 	public final static int MAXIMUM_ITEM_AMOUNT = 2034;
+	public final static HashMap<Items, ItemStack> itemsToItemStack = new HashMap<Items, ItemStack>();
+	
+	public Utils() {
+		initializeItemsToItemStack();
+	}
+	
+	private void initializeItemsToItemStack() {
+		itemsToItemStack.put(Items.TEA_LEAF, TeaLeaf.getTeaLeaf());
+		itemsToItemStack.put(Items.GREEN_TEA_BAG, GreenTeaBag.getTeaBag(GreenTeaBag.getName()));
+	}
+	
+	public static ItemStack getItem(String itemName) {
+		Items i = Items.valueOf(itemName);
+		return itemsToItemStack.get(i);
+	}
 	
 	/**
 	 * Allows the formatting of messages to contain Minecraft colors
@@ -28,7 +49,18 @@ public class Utils {
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
 	
-	public static int hasInventorySpace(Player player, ItemStack itemToAdd)
+	/**
+	 * Adds the ItemStack to the player's inventory.
+	 * 
+	 * Returns 0 if the entire ItemStack was added.
+	 * Returns -1 if none of the ItemStack fit.
+	 * Returns a the remainder of what could not be fit, and adds what could.
+	 * 
+	 * @param player
+	 * @param itemToAdd
+	 * @return
+	 */
+	public static int addToInventory(Player player, ItemStack itemToAdd)
 	{
 		int amount = itemToAdd.getAmount();
 		
@@ -58,7 +90,6 @@ public class Utils {
 	    while (amount > 0) {
 	    	// When there is inventory space
 	    	if (player.getInventory().firstEmpty() != -1) {
-	    		player.sendMessage("Empty inventory slots");
 	    		if (amount > 64) {
 	    			is = itemToAdd.clone();
 	    			is.setAmount(64);
@@ -78,9 +109,16 @@ public class Utils {
 	    		return -1;
 	    	}
 	    }
-	    return -1;
+	    return 0;
 	}
 	
+	/**
+	 * Determines if the two items have the same meta values. Amount is not considered.
+	 * 
+	 * @param inventoryItem
+	 * @param itemToAdd
+	 * @return
+	 */
 	public static boolean isMatchingItemStack(ItemStack inventoryItem, ItemStack itemToAdd) {
 		return (inventoryItem.getItemMeta().getLore().get(0).equals(itemToAdd.getItemMeta().getLore().get(0)) &&
 				inventoryItem.getItemMeta().getDisplayName().equals(itemToAdd.getItemMeta().getDisplayName()));

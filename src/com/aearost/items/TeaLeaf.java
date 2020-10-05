@@ -1,10 +1,12 @@
-package com.aearost.irohstea;
+package com.aearost.items;
 
 import java.util.ArrayList;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import com.aearost.irohstea.Utils;
 
 public class TeaLeaf {
 	

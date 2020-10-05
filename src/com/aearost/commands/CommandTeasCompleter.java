@@ -17,9 +17,6 @@ public class CommandTeasCompleter implements TabCompleter {
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		List<String> displayedOptions = new ArrayList<>();
 		
-		// May have an error here if displayedOptions is not null since it gets initialized
-		// /teas give Aearost TEA_LEAF 7
-		
 		if (args.length == 1) {
 			displayedOptions.add("give");
 		}

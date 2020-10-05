@@ -12,7 +12,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.aearost.irohstea.Main;
-import com.aearost.irohstea.TeaLeaf;
+import com.aearost.items.TeaLeaf;
 
 public class TeaLeafDrop implements Listener {
 
