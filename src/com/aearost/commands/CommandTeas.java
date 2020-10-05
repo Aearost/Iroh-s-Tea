@@ -1,7 +1,6 @@
 package com.aearost.commands;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -13,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 
 import com.aearost.irohstea.Items;
 import com.aearost.irohstea.Utils;
-import com.aearost.items.TeaLeaf;
 
 public class CommandTeas implements CommandExecutor {
 

@@ -7,7 +7,9 @@ import com.aearost.commands.CommandTeas;
 import com.aearost.commands.CommandTeasCompleter;
 import com.aearost.events.TeaCrafting;
 import com.aearost.events.TeaLeafDrop;
+import com.aearost.recipes.CactusJuiceRecipe;
 import com.aearost.recipes.GreenTeaRecipe;
+import com.aearost.recipes.JasmineTeaRecipe;
 
 public class Main extends JavaPlugin {
 	
@@ -22,6 +24,8 @@ public class Main extends JavaPlugin {
 		
 		// Crafting Recipes
 		new GreenTeaRecipe(this);
+		new JasmineTeaRecipe(this);
+		new CactusJuiceRecipe(this);
 		
 		
 		// Initialize commands

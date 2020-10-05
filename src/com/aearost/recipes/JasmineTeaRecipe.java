@@ -10,24 +10,26 @@ import com.aearost.irohstea.Items;
 import com.aearost.irohstea.Utils;
 import com.aearost.items.TeaBag;
 
-public class GreenTeaRecipe {
+public class JasmineTeaRecipe {
 
-	public GreenTeaRecipe(Plugin plugin) {
+	public JasmineTeaRecipe(Plugin plugin) {
 		createRecipe(plugin);
 	}
 	
 	private void createRecipe(Plugin plugin) {
-		NamespacedKey nk = new NamespacedKey(plugin, "GREEN_TEA");
+		NamespacedKey nk = new NamespacedKey(plugin, "JASMINE_TEA");
 		
 		// Use below in cauldron brewing mechanic
-//		PotionEffect pe = new PotionEffect(PotionEffectType.LUCK, 60, 2);
-//		Color c = Color.fromRGB(90, 220, 90);
+//		PotionEffect pe = new PotionEffect(PotionEffectType.SPEED, 200, 1);
+//		Color c = Color.fromRGB(220, 255, 115);
 		
-		ItemStack teaBag = TeaBag.getTeaBag(Items.GREEN_TEA_BAG);
-//		ItemStack teaBag = Utils.getItem(Items.GREEN_TEA_BAG.name());
+		ItemStack teaBag = TeaBag.getTeaBag(Items.JASMINE_TEA_BAG);
+//		ItemStack teaBag = Utils.getItem(Items.JASMINE_TEA_BAG.name());
 		ShapelessRecipe recipe = new ShapelessRecipe(nk, teaBag);
 		
 		recipe.addIngredient(1, Material.KELP);
+		recipe.addIngredient(1, Material.WHITE_TULIP);
+		recipe.addIngredient(1, Material.PEONY);
 		
         plugin.getServer().addRecipe(recipe);
 	}
