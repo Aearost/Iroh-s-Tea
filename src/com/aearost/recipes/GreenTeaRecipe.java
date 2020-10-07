@@ -7,7 +7,6 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.Plugin;
 
 import com.aearost.irohstea.Items;
-import com.aearost.irohstea.Utils;
 import com.aearost.items.TeaBag;
 
 public class GreenTeaRecipe {
@@ -19,12 +18,7 @@ public class GreenTeaRecipe {
 	private void createRecipe(Plugin plugin) {
 		NamespacedKey nk = new NamespacedKey(plugin, "GREEN_TEA");
 		
-		// Use below in cauldron brewing mechanic
-//		PotionEffect pe = new PotionEffect(PotionEffectType.LUCK, 60, 2);
-//		Color c = Color.fromRGB(90, 220, 90);
-		
-		ItemStack teaBag = TeaBag.getTeaBag(Items.GREEN_TEA_BAG);
-//		ItemStack teaBag = Utils.getItem(Items.GREEN_TEA_BAG.name());
+		ItemStack teaBag = TeaBag.getTeaBag(Items.GREEN_TEA);
 		ShapelessRecipe recipe = new ShapelessRecipe(nk, teaBag);
 		
 		recipe.addIngredient(1, Material.KELP);

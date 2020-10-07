@@ -6,6 +6,7 @@ public enum Items {
 	JASMINE_TEA_BAG,
 	
 	GREEN_TEA,
+	JASMINE_TEA,
 	
 	CACTUS_JUICE
 }

@@ -10,8 +10,7 @@ import com.aearost.irohstea.Utils;
 public abstract class TeaBag {
 	
 	public static ItemStack getTeaBag(Items teaItemName) {
-		TeaItem teaItem = Utils.getTeaItem(teaItemName);
-		String teaBagName = teaItem.getTeaBagName();
+		String teaBagName = Utils.getTeaItem(teaItemName).getTeaBagName();
 		
 		ItemStack bag = new ItemStack(Material.PAPER, 1);
 		ItemMeta meta = bag.getItemMeta();

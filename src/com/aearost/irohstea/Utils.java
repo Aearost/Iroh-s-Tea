@@ -2,7 +2,6 @@ package com.aearost.irohstea;
 
 import java.util.HashMap;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.entity.Player;
@@ -19,8 +18,8 @@ import com.aearost.items.TeaLeaf;
 public class Utils {
 
 	public final static int MAXIMUM_ITEM_AMOUNT = 2034;
-	private final static HashMap<Items, ItemStack> itemsToItemStack = new HashMap<Items, ItemStack>();
-	public final static HashMap<Items, TeaItem> itemsToTea = new HashMap<Items, TeaItem>();
+	private final static HashMap<String, ItemStack> itemsToItemStack = new HashMap<String, ItemStack>();
+	public final static HashMap<String, TeaItem> itemsToTea = new HashMap<String, TeaItem>();
 
 	public Utils() {
 		initializeTeas();
@@ -28,30 +27,31 @@ public class Utils {
 	}
 
 	private void initializeTeas() {
-		TeaItem greenTea = new TeaItem("&2Green Tea", "&a&oSimple, yet delicious",
-				new PotionEffect(PotionEffectType.LUCK, 60, 2), Color.fromRGB(90, 220, 90));
-		itemsToTea.put(Items.GREEN_TEA, greenTea);
+		itemsToTea.put(Items.GREEN_TEA.name(), new TeaItem("&2Green Tea", "&a&oSimple, yet delicious",
+				new PotionEffect(PotionEffectType.LUCK, 600, 2), Color.fromRGB(90, 220, 90)));
+		itemsToTea.put(Items.JASMINE_TEA.name(), new TeaItem("&eJasmine Tea", "&7&oThe sweet taste of blossoms",
+				new PotionEffect(PotionEffectType.SPEED, 1200, 1), Color.fromRGB(220, 255, 115)));
 	}
 	
 	private void initializeItemsToItemStack() {
-		itemsToItemStack.put(Items.TEA_LEAF, TeaLeaf.getTeaLeaf());
+		itemsToItemStack.put(Items.TEA_LEAF.name(), TeaLeaf.getTeaLeaf());
 		
-		itemsToItemStack.put(Items.GREEN_TEA_BAG, TeaBag.getTeaBag(Items.GREEN_TEA_BAG));
-		itemsToItemStack.put(Items.JASMINE_TEA_BAG, TeaBag.getTeaBag(Items.JASMINE_TEA_BAG));
+		itemsToItemStack.put(Items.GREEN_TEA_BAG.name(), TeaBag.getTeaBag(Items.GREEN_TEA));
+		itemsToItemStack.put(Items.JASMINE_TEA_BAG.name(), TeaBag.getTeaBag(Items.JASMINE_TEA));
 		
-		itemsToItemStack.put(Items.GREEN_TEA, Tea.getTea(Items.GREEN_TEA));
+		itemsToItemStack.put(Items.GREEN_TEA.name(), Tea.getTea(Items.GREEN_TEA));
+		itemsToItemStack.put(Items.JASMINE_TEA.name(), Tea.getTea(Items.JASMINE_TEA));
 		
-		itemsToItemStack.put(Items.CACTUS_JUICE, CactusJuice.getCactusJuice());
+		itemsToItemStack.put(Items.CACTUS_JUICE.name(), CactusJuice.getCactusJuice());
 	}
 	
 	public static TeaItem getTeaItem(Items tea) {
-		Bukkit.getLogger().info("In getTeaItem");
-		return itemsToTea.get(tea);
+		return itemsToTea.get(tea.name());
 	}
 	
 	public static ItemStack getItem(String itemName) {
 		Items i = Items.valueOf(itemName);
-		return itemsToItemStack.get(i);
+		return itemsToItemStack.get(i.name());
 	}
 
 	/**
