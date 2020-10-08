@@ -6,7 +6,6 @@ public class CauldronInfo {
 	
 	private boolean hasBottle;
 	private boolean hasTeaBag;
-	private boolean hasTeaBagBeenUsed;
 	private ItemStack tea;
 	
 	public CauldronInfo(boolean hasBottle, boolean hasTeaBag) {
@@ -28,14 +27,6 @@ public class CauldronInfo {
 	
 	public void setHasTeaBag(boolean hasTeaBag) {
 		this.hasTeaBag = hasTeaBag;
-	}
-	
-	public boolean getHasTeaBagBeenUsed() {
-		return this.hasTeaBagBeenUsed;
-	}
-	
-	public void setHasTeaBagBeenUsed(boolean hasTeaBagBeenUsed) {
-		this.hasTeaBagBeenUsed = hasTeaBagBeenUsed;
 	}
 	
 	public ItemStack getTea() {

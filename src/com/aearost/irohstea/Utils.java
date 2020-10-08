@@ -69,6 +69,14 @@ public class Utils {
 		locationToCauldronInfo.remove(l);
 	}
 	
+	public static String getTeaName(ItemStack is) {
+		String teaName = is.getItemMeta().getDisplayName();
+		teaName = teaName.substring(2, teaName.length() - 4);
+		teaName = teaName.toUpperCase();
+		teaName = teaName.replace(" ", "_");
+		return teaName;
+	}
+	
 	
 	/**
 	 * Allows the formatting of messages to contain Minecraft colors
