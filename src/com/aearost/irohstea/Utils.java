@@ -4,12 +4,14 @@ import java.util.HashMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.aearost.items.CactusJuice;
+import com.aearost.items.CauldronInfo;
 import com.aearost.items.Tea;
 import com.aearost.items.TeaBag;
 import com.aearost.items.TeaItem;
@@ -20,6 +22,7 @@ public class Utils {
 	public final static int MAXIMUM_ITEM_AMOUNT = 2034;
 	private final static HashMap<String, ItemStack> itemsToItemStack = new HashMap<String, ItemStack>();
 	public final static HashMap<String, TeaItem> itemsToTea = new HashMap<String, TeaItem>();
+	public final static HashMap<Location, CauldronInfo> locationToCauldronInfo = new HashMap<Location, CauldronInfo>();
 
 	public Utils() {
 		initializeTeas();
@@ -53,7 +56,20 @@ public class Utils {
 		Items i = Items.valueOf(itemName);
 		return itemsToItemStack.get(i.name());
 	}
-
+	
+	public static CauldronInfo getCauldronInfo(Location l) {
+		return locationToCauldronInfo.get(l);
+	}
+	
+	public static void setCauldronInfo(Location l, CauldronInfo ci) {
+		locationToCauldronInfo.put(l, ci);
+	}
+	
+	public static void removeCauldronInfo(Location l) {
+		locationToCauldronInfo.remove(l);
+	}
+	
+	
 	/**
 	 * Allows the formatting of messages to contain Minecraft colors
 	 * 
