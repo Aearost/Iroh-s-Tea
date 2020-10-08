@@ -77,6 +77,9 @@ public class Utils {
 		return teaName;
 	}
 	
+	public static HashMap<Location, CauldronInfo> getLocationToCauldronInfo() {
+		return locationToCauldronInfo;
+	}
 	
 	/**
 	 * Allows the formatting of messages to contain Minecraft colors

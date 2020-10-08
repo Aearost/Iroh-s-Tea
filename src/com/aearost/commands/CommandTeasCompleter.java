@@ -19,30 +19,41 @@ public class CommandTeasCompleter implements TabCompleter {
 		
 		if (args.length == 1) {
 			displayedOptions.add("give");
+			displayedOptions.add("kettles");
 		}
-		else if (args.length == 2 && args[0].equals("give")) {
-			Player[] onlinePlayers = new Player[Bukkit.getOnlinePlayers().size()];
-			Bukkit.getOnlinePlayers().toArray(onlinePlayers);
-			for (int i = 0; i < onlinePlayers.length; i++) {
-				if (onlinePlayers[i].getName().toLowerCase().startsWith(args[1].toLowerCase())) {
-					displayedOptions.add(onlinePlayers[i].getName());
+		if (args[0].equals("give")) {
+			if (args.length == 2) {
+				Player[] onlinePlayers = new Player[Bukkit.getOnlinePlayers().size()];
+				Bukkit.getOnlinePlayers().toArray(onlinePlayers);
+				for (int i = 0; i < onlinePlayers.length; i++) {
+					if (onlinePlayers[i].getName().toLowerCase().startsWith(args[1].toLowerCase())) {
+						displayedOptions.add(onlinePlayers[i].getName());
+					}
 				}
 			}
-		}
-		// If the input player exists
-		else if (args.length == 3 && args[0].equals("give") && Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1]))) {
-			for (Items i : Items.values()) {
-				if (i.name().toLowerCase().startsWith(args[2].toLowerCase())) {
-					displayedOptions.add(i.name());
+			// If the input player exists
+			else if (args.length == 3 && args[0].equals("give") && Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1]))) {
+				for (Items i : Items.values()) {
+					if (i.name().toLowerCase().startsWith(args[2].toLowerCase())) {
+						displayedOptions.add(i.name());
+					}
 				}
 			}
-		}
-		// Prompts amount but clears once something is entered
-		else if (args.length == 4) {
-			if (args[3].equals("")) {
-				displayedOptions.add("64");
+			// Prompts amount but clears once something is entered
+			else if (args.length == 4) {
+				if (args[3].equals("")) {
+					displayedOptions.add("1");
+					displayedOptions.add("64");
+				}
+			}
+		} else if (args[0].equals("kettles")) {
+			if (args.length == 2) {
+				displayedOptions.add("display");
+				displayedOptions.add("remove");
+				displayedOptions.add("removeall");
 			}
 		}
+		
 		return displayedOptions;
 	}
 	

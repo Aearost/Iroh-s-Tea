@@ -1,9 +1,14 @@
 package com.aearost.commands;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.aearost.irohstea.Items;
 import com.aearost.irohstea.Utils;
+import com.aearost.items.CauldronInfo;
 
 public class CommandTeas implements CommandExecutor {
 
@@ -20,48 +26,91 @@ public class CommandTeas implements CommandExecutor {
 		if (args.length == 0) {
 			sender.sendMessage(Utils.translateToColor("&a         - - &2&lIroh's Teas &a- -"));
 			sender.sendMessage(Utils.translateToColor("&6/teas &egive <player> <item> &7[amount]"));
-			return false;
-		} else if (args.length < 3) {
-			sender.sendMessage(Utils.translateToColor("&aProper Usage: &6/teas &egive <player> <item> &7[amount]"));
+			sender.sendMessage(Utils.translateToColor("&6/teas &ekettles <display | remove | removeall>"));
 			return false;
 		}
 
-		if (args.length >= 3 && args[0].equals("give")) {
-			// Creates a list of all Items
-			List<String> itemsAsList = new ArrayList<>();
-			for (Items i : Items.values()) {
-				itemsAsList.add(i.name());
-			}
+		if (args[0].equals("give")) {
+			if (args.length >= 3) {
+				// Creates a list of all Items
+				List<String> itemsAsList = new ArrayList<>();
+				for (Items i : Items.values()) {
+					itemsAsList.add(i.name());
+				}
 
-			if (!itemsAsList.contains(args[2])) {
-				sender.sendMessage(Utils.chatMessage("&7" + args[2] + " &cdoes not exist!"));
-				return false;
-			}
-
-			Player target = Bukkit.getPlayer(args[1]);
-			if (args.length == 4) {
-				int amount;
-				try {
-					amount = Integer.parseInt(args[3]);
-				} catch (NumberFormatException e) {
-					sender.sendMessage(Utils.chatMessage("&cThat is not a valid amount!"));
+				if (!itemsAsList.contains(args[2])) {
+					sender.sendMessage(Utils.chatMessage("&7" + args[2] + " &cdoes not exist!"));
 					return false;
 				}
-				// In valid inventory slot range
-				if (amount > 0 && amount <= Utils.MAXIMUM_ITEM_AMOUNT) {
-					ItemStack is = Utils.getItem(args[2]);
-					is.setAmount(amount);
-					return giveItem(is, target, sender);
+
+				Player target = Bukkit.getPlayer(args[1]);
+				if (args.length == 4) {
+					int amount;
+					try {
+						amount = Integer.parseInt(args[3]);
+					} catch (NumberFormatException e) {
+						sender.sendMessage(Utils.chatMessage("&cThat is not a valid amount!"));
+						return false;
+					}
+					// In valid inventory slot range
+					if (amount > 0 && amount <= Utils.MAXIMUM_ITEM_AMOUNT) {
+						ItemStack is = Utils.getItem(args[2]);
+						is.setAmount(amount);
+						return giveItem(is, target, sender);
+					} else {
+						sender.sendMessage(Utils.chatMessage("&cThat is not a valid amount!"));
+					}
 				} else {
-					sender.sendMessage(Utils.chatMessage("&cThat is not a valid amount!"));
+					ItemStack is = Utils.getItem(args[2]);
+					// If not specified, will give 64
+					is.setAmount(64);
+					return giveItem(is, target, sender);
 				}
-			} else {
-				ItemStack is = Utils.getItem(args[2]);
-				// If not specified, will give 64
-				is.setAmount(64);
-				return giveItem(is, target, sender);
+			}
+		} else if (args[0].equals("kettles")) {
+			if (args.length == 2) {
+				Map<Location, CauldronInfo> locationToCauldronInfo = (Map<Location, CauldronInfo>) Utils.getLocationToCauldronInfo().clone();
+				if (args[1].equals("display")) {
+					if (locationToCauldronInfo.size() == 0) {
+						sender.sendMessage(Utils.chatMessage("&7There are currently no active kettles"));
+						return true;
+					}
+					sender.sendMessage(Utils.translateToColor("&e         - - &6&lActive Kettles &e- -"));
+					int i = 1;
+					for (Map.Entry<Location, CauldronInfo> entry : locationToCauldronInfo.entrySet()) {
+						Location l = entry.getKey();
+						if (entry.getValue().getHasBottle()) {
+							sender.sendMessage(Utils.translateToColor("&6" + i + ". &ex: " + l.getBlockX() + " | y: " + l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Empty bottle)"));
+						} else if (entry.getValue().getHasTeaBag()) {
+							sender.sendMessage(Utils.translateToColor("&6" + i + ". &ex: " + l.getBlockX() + " | y: " + l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Tea bag)"));
+						}
+						i++;
+					}
+					return true;
+				} else if (args[1].equals("removeall")) {
+					if (locationToCauldronInfo.size() == 0) {
+						sender.sendMessage(Utils.chatMessage("&7There are currently no active kettles"));
+						return false;
+					}
+					for (Map.Entry<Location, CauldronInfo> entry : locationToCauldronInfo.entrySet()) {
+						Location l = entry.getKey();
+						Utils.removeCauldronInfo(l);
+					}
+					sender.sendMessage(Utils.chatMessage("&aAll kettles have been removed"));
+					return true;
+				}
+			} else if (args[1].equals("remove") && args.length == 5) {
+				sender.sendMessage(Utils.chatMessage("&5Functionality will be implemented here!"));
+				// arg 1 is kettles
+				// arg 2 is remove
+				// arg 3 is x
+				// arg 3 is y
+				// arg 4 is z
 			}
 		}
+		
+		// If the first parameter entered does not exist
+		sender.sendMessage(Utils.translateToColor("&aProper Usage: &6/teas &egive <player> <item> &7[amount]"));
 		return false;
 	}
 
