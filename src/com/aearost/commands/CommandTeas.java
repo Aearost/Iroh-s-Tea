@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import com.aearost.irohstea.Items;
 import com.aearost.irohstea.Utils;
 import com.aearost.items.CauldronInfo;
+import com.aearost.items.TeaBag;
 
 public class CommandTeas implements CommandExecutor {
 
@@ -25,10 +27,14 @@ public class CommandTeas implements CommandExecutor {
 			sender.sendMessage(Utils.translateToColor("&a         - - &2&lIroh's Teas &a- -"));
 			sender.sendMessage(Utils.translateToColor("&6/teas &egive <player> <item> &7[amount]"));
 			sender.sendMessage(Utils.translateToColor("&6/teas &ekettles <display | remove | removeall>"));
-			return false;
+			return true;
 		}
 
 		if (args[0].equals("give")) {
+			if (!sender.hasPermission("irohsteas.admin.give")) {
+				sender.sendMessage(Utils.chatMessage("&cYou do not have permission to use this command!"));
+				return false;
+			}
 			if (args.length >= 3) {
 				// Creates a list of all Items
 				List<String> itemsAsList = new ArrayList<>();
@@ -36,7 +42,7 @@ public class CommandTeas implements CommandExecutor {
 					itemsAsList.add(i.name());
 				}
 
-				if (!itemsAsList.contains(args[2])) {
+				if (!itemsAsList.contains(args[2].toUpperCase())) {
 					sender.sendMessage(Utils.chatMessage("&7" + args[2] + " &cdoes not exist!"));
 					return false;
 				}
@@ -64,8 +70,17 @@ public class CommandTeas implements CommandExecutor {
 					is.setAmount(64);
 					return giveItem(is, target, sender);
 				}
+			} else if (!Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1]))) {
+				sender.sendMessage(Utils.translateToColor("&7" + args[1] + " &ccould not be found!"));
+				return false;
 			}
+			sender.sendMessage(Utils.translateToColor("&aProper Usage: &6/teas &egive <player> <item> &7[amount]"));
+			return false;
 		} else if (args[0].equals("kettles")) {
+			if (!sender.hasPermission("irohsteas.admin.kettles")) {
+				sender.sendMessage(Utils.chatMessage("&cYou do not have permission to use this command!"));
+				return false;
+			}
 			if (args.length == 2) {
 				Map<Location, CauldronInfo> locationToCauldronInfo = (Map<Location, CauldronInfo>) Utils
 						.getLocationToCauldronInfo().clone();
@@ -95,12 +110,23 @@ public class CommandTeas implements CommandExecutor {
 					}
 					for (Map.Entry<Location, CauldronInfo> entry : locationToCauldronInfo.entrySet()) {
 						Location l = entry.getKey();
+						if (l.getChunk().isLoaded()) {
+							CauldronInfo ci = Utils.getCauldronInfo(l);
+							if (ci.getHasBottle()) {
+								l.getWorld().dropItemNaturally(l, new ItemStack(Material.GLASS_BOTTLE, 1));
+							} else if (ci.getHasTeaBag()) {
+								l.getWorld().dropItemNaturally(l, TeaBag.getTeaBag(Items.valueOf(Utils.getTeaName(ci.getTea()) + "_TEA")));
+							}
+						}
 						Utils.removeCauldronInfo(l);
 					}
 					sender.sendMessage(Utils.chatMessage("&aAll kettles have been removed"));
 					return true;
+				} else if (args[1].equals("remove")) {
+					sender.sendMessage(Utils.translateToColor("&aProper Usage: &6/teas &ekettles remove <x> <y> <z>"));
+					return false;
 				}
-			} else if (args[1].equals("remove") && args.length == 5) {
+			} else if (args.length == 5 && args[1].equals("remove")) {
 				int x, y, z;
 				try {
 					x = Integer.parseInt(args[2]);
@@ -127,8 +153,15 @@ public class CommandTeas implements CommandExecutor {
 					Location l = new Location(((Player) sender).getWorld(), x, y, z);
 					CauldronInfo ci = Utils.getCauldronInfo(l);
 					if (ci != null) {
-						sender.sendMessage(Utils
-								.chatMessage("&7The kettle at &fx: " + x + " | y: " + y + " | z: " + z + " &7has been deleted"));
+						sender.sendMessage(Utils.chatMessage(
+								"&7The kettle at &fx: " + x + " | y: " + y + " | z: " + z + " &7has been deleted"));
+						if (l.getChunk().isLoaded()) {
+							if (ci.getHasBottle()) {
+								l.getWorld().dropItemNaturally(l, new ItemStack(Material.GLASS_BOTTLE, 1));
+							} else if (ci.getHasTeaBag()) {
+								l.getWorld().dropItemNaturally(l, TeaBag.getTeaBag(Items.valueOf(Utils.getTeaName(ci.getTea()) + "_TEA")));
+							}
+						}
 						Utils.removeCauldronInfo(l);
 						return true;
 					} else {
@@ -138,10 +171,14 @@ public class CommandTeas implements CommandExecutor {
 					}
 				}
 			}
-
 			// If the first parameter entered does not exist
-			sender.sendMessage(Utils.translateToColor("&aProper Usage: &6/teas &egive <player> <item> &7[amount]"));
+			sender.sendMessage(
+					Utils.translateToColor("&aProper Usage: &6/teas &ekettles <display | remove | removeall>"));
+			return false;
 		}
+		sender.sendMessage(Utils.translateToColor("&a         - - &2&lIroh's Teas &a- -"));
+		sender.sendMessage(Utils.translateToColor("&6/teas &egive <player> <item> &7[amount]"));
+		sender.sendMessage(Utils.translateToColor("&6/teas &ekettles <display | remove | removeall>"));
 		return false;
 	}
 

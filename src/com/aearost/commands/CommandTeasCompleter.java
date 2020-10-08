@@ -17,12 +17,12 @@ public class CommandTeasCompleter implements TabCompleter {
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		List<String> displayedOptions = new ArrayList<>();
 		
-		if (args.length == 1) {
-			displayedOptions.add("give");
-			displayedOptions.add("kettles");
-		}
-		if (args[0].equals("give")) {
-			if (args.length == 2) {
+		if ("give".startsWith(args[0]) && args[0].length() > 0) {
+			if (args.length == 1) {
+				displayedOptions.add("give");
+			}
+			// List online players
+			else if (args.length == 2) {
 				Player[] onlinePlayers = new Player[Bukkit.getOnlinePlayers().size()];
 				Bukkit.getOnlinePlayers().toArray(onlinePlayers);
 				for (int i = 0; i < onlinePlayers.length; i++) {
@@ -46,12 +46,35 @@ public class CommandTeasCompleter implements TabCompleter {
 					displayedOptions.add("64");
 				}
 			}
-		} else if (args[0].equals("kettles")) {
-			if (args.length == 2) {
-				displayedOptions.add("display");
-				displayedOptions.add("remove");
-				displayedOptions.add("removeall");
+			
+			
+		} else if ("kettles".startsWith(args[0]) && args[0].length() > 0) {
+			if (args.length == 1) {
+				displayedOptions.add("kettles");
 			}
+			else if (args.length == 2) {
+				if ("display".startsWith(args[1]) && args[1].length() > 0) {
+					displayedOptions.add("display");
+				} else if ("remove".startsWith(args[1]) && args[1].length() > 0) {
+					displayedOptions.add("remove");
+					displayedOptions.add("removeall");
+				} else if ("removeall".startsWith(args[1]) && args[1].length() > 0) {
+					displayedOptions.add("removeall");
+				} else {
+					displayedOptions.add("display");
+					displayedOptions.add("remove");
+					displayedOptions.add("removeall");
+				}
+			} else if (args.length == 3 && args[1].equals("remove")) {
+				displayedOptions.add("0");
+			} else if (args.length == 4 && args[1].equals("remove")) {
+				displayedOptions.add("0");
+			} else if (args.length == 5 && args[1].equals("remove")) {
+				displayedOptions.add("0");
+			}
+		} else if (args.length == 1) {
+			displayedOptions.add("give");
+			displayedOptions.add("kettles");
 		}
 		
 		return displayedOptions;
