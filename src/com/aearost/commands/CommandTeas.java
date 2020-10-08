@@ -1,9 +1,6 @@
 package com.aearost.commands;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +18,7 @@ import com.aearost.items.CauldronInfo;
 
 public class CommandTeas implements CommandExecutor {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
@@ -69,7 +67,8 @@ public class CommandTeas implements CommandExecutor {
 			}
 		} else if (args[0].equals("kettles")) {
 			if (args.length == 2) {
-				Map<Location, CauldronInfo> locationToCauldronInfo = (Map<Location, CauldronInfo>) Utils.getLocationToCauldronInfo().clone();
+				Map<Location, CauldronInfo> locationToCauldronInfo = (Map<Location, CauldronInfo>) Utils
+						.getLocationToCauldronInfo().clone();
 				if (args[1].equals("display")) {
 					if (locationToCauldronInfo.size() == 0) {
 						sender.sendMessage(Utils.chatMessage("&7There are currently no active kettles"));
@@ -80,9 +79,11 @@ public class CommandTeas implements CommandExecutor {
 					for (Map.Entry<Location, CauldronInfo> entry : locationToCauldronInfo.entrySet()) {
 						Location l = entry.getKey();
 						if (entry.getValue().getHasBottle()) {
-							sender.sendMessage(Utils.translateToColor("&6" + i + ". &ex: " + l.getBlockX() + " | y: " + l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Empty bottle)"));
+							sender.sendMessage(Utils.translateToColor("&6" + i + ". &ex: " + l.getBlockX() + " | y: "
+									+ l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Empty bottle)"));
 						} else if (entry.getValue().getHasTeaBag()) {
-							sender.sendMessage(Utils.translateToColor("&6" + i + ". &ex: " + l.getBlockX() + " | y: " + l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Tea bag)"));
+							sender.sendMessage(Utils.translateToColor("&6" + i + ". &ex: " + l.getBlockX() + " | y: "
+									+ l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Tea bag)"));
 						}
 						i++;
 					}
@@ -100,17 +101,47 @@ public class CommandTeas implements CommandExecutor {
 					return true;
 				}
 			} else if (args[1].equals("remove") && args.length == 5) {
-				sender.sendMessage(Utils.chatMessage("&5Functionality will be implemented here!"));
-				// arg 1 is kettles
-				// arg 2 is remove
-				// arg 3 is x
-				// arg 3 is y
-				// arg 4 is z
+				int x, y, z;
+				try {
+					x = Integer.parseInt(args[2]);
+				} catch (NumberFormatException e) {
+					sender.sendMessage(Utils.chatMessage("&cPlease enter a valid x coordinate"));
+					return false;
+				}
+				try {
+					y = Integer.parseInt(args[3]);
+				} catch (NumberFormatException e) {
+					sender.sendMessage(Utils.chatMessage("&cPlease enter a valid y coordinate"));
+					return false;
+				}
+				try {
+					z = Integer.parseInt(args[4]);
+				} catch (NumberFormatException e) {
+					sender.sendMessage(Utils.chatMessage("&cPlease enter a valid z coordinate"));
+					return false;
+				}
+				if (!(sender instanceof Player)) {
+					sender.sendMessage(Utils.chatMessage("&cThis command can only be executed by a player!"));
+					return false;
+				} else {
+					Location l = new Location(((Player) sender).getWorld(), x, y, z);
+					CauldronInfo ci = Utils.getCauldronInfo(l);
+					if (ci != null) {
+						sender.sendMessage(Utils
+								.chatMessage("&7The kettle at &fx: " + x + " | y: " + y + " | z: " + z + " &7has been deleted"));
+						Utils.removeCauldronInfo(l);
+						return true;
+					} else {
+						sender.sendMessage(Utils.chatMessage(
+								"&cThere was no kettle found at this location! Note that you must be in the same world as the kettle in order for this command to work properly!"));
+						return false;
+					}
+				}
 			}
+
+			// If the first parameter entered does not exist
+			sender.sendMessage(Utils.translateToColor("&aProper Usage: &6/teas &egive <player> <item> &7[amount]"));
 		}
-		
-		// If the first parameter entered does not exist
-		sender.sendMessage(Utils.translateToColor("&aProper Usage: &6/teas &egive <player> <item> &7[amount]"));
 		return false;
 	}
 
