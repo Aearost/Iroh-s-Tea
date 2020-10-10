@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.aearost.irohstea.Items;
 import com.aearost.irohstea.Utils;
 
 public abstract class TeaBag {

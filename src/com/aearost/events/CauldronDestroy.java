@@ -9,10 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.aearost.irohstea.Items;
 import com.aearost.irohstea.Main;
 import com.aearost.irohstea.Utils;
 import com.aearost.items.CauldronInfo;
+import com.aearost.items.Items;
 import com.aearost.items.TeaBag;
 
 public class CauldronDestroy implements Listener {

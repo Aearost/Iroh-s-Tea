@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.Plugin;
 
-import com.aearost.irohstea.Items;
+import com.aearost.items.Items;
 import com.aearost.items.TeaBag;
 
 public class GreenTeaRecipe {

@@ -13,9 +13,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.aearost.irohstea.Items;
 import com.aearost.irohstea.Utils;
 import com.aearost.items.CauldronInfo;
+import com.aearost.items.Items;
+import com.aearost.items.RecipeBook;
 import com.aearost.items.TeaBag;
 
 public class CommandTeas implements CommandExecutor {
@@ -30,7 +31,14 @@ public class CommandTeas implements CommandExecutor {
 			return true;
 		}
 
-		if (args[0].equals("give")) {
+		if (args[0].equals("book")) {
+			if (sender instanceof Player) {
+				((Player) sender).getInventory().addItem(RecipeBook.getRecipeBook());
+				sender.sendMessage(Utils.chatMessage("&aA recipe book has been added to your inventory!"));
+				return true;
+			}
+		}
+		else if (args[0].equals("give")) {
 			if (!sender.hasPermission("irohsteas.admin.give")) {
 				sender.sendMessage(Utils.chatMessage("&cYou do not have permission to use this command!"));
 				return false;

@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import com.aearost.irohstea.Items;
+import com.aearost.items.Items;
 
 public class CommandTeasCompleter implements TabCompleter {
 
@@ -17,7 +17,12 @@ public class CommandTeasCompleter implements TabCompleter {
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		List<String> displayedOptions = new ArrayList<>();
 		
-		if ("give".startsWith(args[0]) && args[0].length() > 0) {
+		if ("book".startsWith(args[0]) && args[0].length() > 0) {
+			if (args.length == 1) {
+				displayedOptions.add("book");
+			}
+		}
+		else if ("give".startsWith(args[0]) && args[0].length() > 0) {
 			if (args.length == 1) {
 				displayedOptions.add("give");
 			}
@@ -73,6 +78,7 @@ public class CommandTeasCompleter implements TabCompleter {
 				displayedOptions.add("0");
 			}
 		} else if (args.length == 1) {
+			displayedOptions.add("book");
 			displayedOptions.add("give");
 			displayedOptions.add("kettles");
 		}

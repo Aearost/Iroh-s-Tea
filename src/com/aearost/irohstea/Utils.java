@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.aearost.items.CactusJuice;
 import com.aearost.items.CauldronInfo;
+import com.aearost.items.Items;
 import com.aearost.items.Tea;
 import com.aearost.items.TeaBag;
 import com.aearost.items.TeaItem;
@@ -33,7 +34,7 @@ public class Utils {
 		itemsToTea.put(Items.GREEN_TEA.name(), new TeaItem("&2Green Tea", "&a&oSimple, yet delicious",
 				new PotionEffect(PotionEffectType.LUCK, 600, 2), Color.fromRGB(90, 220, 90)));
 		itemsToTea.put(Items.JASMINE_TEA.name(), new TeaItem("&eJasmine Tea", "&7&oThe sweet taste of blossoms",
-				new PotionEffect(PotionEffectType.SPEED, 1200, 1), Color.fromRGB(220, 255, 115)));
+				new PotionEffect(PotionEffectType.SPEED, 1200, 2), Color.fromRGB(220, 255, 115)));
 	}
 	
 	private void initializeItemsToItemStack() {
@@ -100,7 +101,7 @@ public class Utils {
 	public static String translateToColor(String msg) {
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
-
+	
 	/**
 	 * Adds the ItemStack to the player's inventory.
 	 * 

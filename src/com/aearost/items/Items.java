@@ -1,4 +1,4 @@
-package com.aearost.irohstea;
+package com.aearost.items;
 
 public enum Items {
 	TEA_LEAF,
