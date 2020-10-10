@@ -2,6 +2,7 @@ package com.aearost.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
@@ -18,10 +19,11 @@ public class TeaCrafting implements Listener {
 	
 	@EventHandler
 	public void onCraftTea(final CraftItemEvent e) {
+		HumanEntity he = e.getWhoClicked();
 		for (ItemStack is : e.getInventory().getContents()) {
 			if (is.getType() == Material.KELP && e.getRecipe().getResult().getType() == Material.PAPER) {
 				if (!is.getItemMeta().hasLore()) {
-					e.getWhoClicked().sendMessage(Utils.chatMessage("&cYou must use a tea leaf, not kelp!"));
+					he.sendMessage(Utils.chatMessage("&cYou must use a tea leaf, not kelp!"));
 					e.setCancelled(true);
 					return;
 				}
