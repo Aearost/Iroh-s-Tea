@@ -89,6 +89,9 @@ public class CauldronBrewing implements Listener {
 								p.sendMessage(Utils.chatMessage("&cThere is no flame beneath the kettle!"));
 								return;
 							}
+						} else {
+							p.sendMessage(Utils.chatMessage("&cThat is not a valid ingredient!"));
+							return;
 						}
 					} else {
 						if (isTeaBag(is)) {
@@ -120,14 +123,11 @@ public class CauldronBrewing implements Listener {
 								e.setCancelled(true);
 								return;
 							}
-						} else {
-							p.sendMessage(Utils.chatMessage("&cThat is not a valid ingredient!"));
-							return;
 						}
 					}
 
 					// If both ingredients have been put in the cauldron
-					if (ci.getHasBottle() && ci.getHasTeaBag()) {
+					if (ci != null && ci.getHasBottle() && ci.getHasTeaBag()) {
 						p.sendMessage(Utils.chatMessage("&2Your tea has been brewed!"));
 
 						// Brew the tea

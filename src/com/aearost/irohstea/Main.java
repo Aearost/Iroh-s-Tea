@@ -9,6 +9,7 @@ import com.aearost.events.CauldronBrewing;
 import com.aearost.events.CauldronDestroy;
 import com.aearost.events.TeaCrafting;
 import com.aearost.events.TeaLeafDrop;
+import com.aearost.recipes.AppleCinnamonTeaRecipe;
 import com.aearost.recipes.CactusJuiceRecipe;
 import com.aearost.recipes.GreenTeaRecipe;
 import com.aearost.recipes.JasmineTeaRecipe;
@@ -30,6 +31,7 @@ public class Main extends JavaPlugin {
 		new GreenTeaRecipe(this);
 		new JasmineTeaRecipe(this);
 		new CactusJuiceRecipe(this);
+		new AppleCinnamonTeaRecipe(this);
 		
 		
 		// Initialize commands

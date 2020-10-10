@@ -31,18 +31,22 @@ public class Utils {
 	}
 
 	private void initializeTeas() {
+		itemsToTea.put(Items.APPLE_CINNAMON_TEA.name(), new TeaItem("&cApple Cinnamon Tea", "&6&oJust a hint of tree bark",
+				new PotionEffect(PotionEffectType.FAST_DIGGING, 1800, 1), Color.fromRGB(220, 255, 115)));
 		itemsToTea.put(Items.GREEN_TEA.name(), new TeaItem("&2Green Tea", "&a&oSimple, yet delicious",
 				new PotionEffect(PotionEffectType.LUCK, 600, 2), Color.fromRGB(90, 220, 90)));
 		itemsToTea.put(Items.JASMINE_TEA.name(), new TeaItem("&eJasmine Tea", "&7&oThe sweet taste of blossoms",
-				new PotionEffect(PotionEffectType.SPEED, 1200, 2), Color.fromRGB(220, 255, 115)));
+				new PotionEffect(PotionEffectType.SPEED, 1200, 2), Color.fromRGB(255, 153, 102)));
 	}
 	
 	private void initializeItemsToItemStack() {
 		itemsToItemStack.put(Items.TEA_LEAF.name(), TeaLeaf.getTeaLeaf());
 		
+		itemsToItemStack.put(Items.APPLE_CINNAMON_TEA_BAG.name(), TeaBag.getTeaBag(Items.APPLE_CINNAMON_TEA));
 		itemsToItemStack.put(Items.GREEN_TEA_BAG.name(), TeaBag.getTeaBag(Items.GREEN_TEA));
 		itemsToItemStack.put(Items.JASMINE_TEA_BAG.name(), TeaBag.getTeaBag(Items.JASMINE_TEA));
 		
+		itemsToItemStack.put(Items.APPLE_CINNAMON_TEA.name(), Tea.getTea(Items.APPLE_CINNAMON_TEA));
 		itemsToItemStack.put(Items.GREEN_TEA.name(), Tea.getTea(Items.GREEN_TEA));
 		itemsToItemStack.put(Items.JASMINE_TEA.name(), Tea.getTea(Items.JASMINE_TEA));
 		
