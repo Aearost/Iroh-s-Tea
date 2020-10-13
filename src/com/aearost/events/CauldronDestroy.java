@@ -9,11 +9,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.aearost.irohstea.Main;
-import com.aearost.irohstea.Utils;
-import com.aearost.items.CauldronInfo;
+import com.aearost.Main;
 import com.aearost.items.Items;
+import com.aearost.items.Kettle;
 import com.aearost.items.TeaBag;
+import com.aearost.utils.ItemUtils;
+import com.aearost.utils.KettleUtils;
 
 public class CauldronDestroy implements Listener {
 
@@ -26,7 +27,7 @@ public class CauldronDestroy implements Listener {
 		Block b = e.getBlock();
 		if (b.getType() == Material.CAULDRON) {
 			Location l = b.getLocation();
-			CauldronInfo ci = Utils.getCauldronInfo(l);
+			Kettle ci = KettleUtils.getKettle(l);
 			
 			if (ci == null) {
 				return;
@@ -35,9 +36,9 @@ public class CauldronDestroy implements Listener {
 			if (ci.getHasBottle()) {
 				l.getWorld().dropItemNaturally(l, new ItemStack(Material.GLASS_BOTTLE, 1));
 			} else if (ci.getHasTeaBag()) {
-				l.getWorld().dropItemNaturally(l, TeaBag.getTeaBag(Items.valueOf(Utils.getTeaName(ci.getTea()) + "_TEA")));
+				l.getWorld().dropItemNaturally(l, TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(ci.getTea()) + "_TEA")));
 			}
-			Utils.removeCauldronInfo(l);
+			KettleUtils.removeKettle(l);
 		}
 	}
 	

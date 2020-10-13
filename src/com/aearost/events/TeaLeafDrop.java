@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.aearost.irohstea.Main;
+import com.aearost.Main;
 import com.aearost.items.TeaLeaf;
 
 public class TeaLeafDrop implements Listener {

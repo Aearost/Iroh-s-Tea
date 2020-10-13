@@ -1,4 +1,4 @@
-package com.aearost.irohstea;
+package com.aearost;
 
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,13 +18,16 @@ import com.aearost.recipes.MatchaTeaRecipe;
 import com.aearost.recipes.T8TeaRecipe;
 import com.aearost.recipes.WhiteDragonTeaRecipe;
 import com.aearost.recipes.WhiteJadeTeaRecipe;
+import com.aearost.utils.ItemUtils;
+import com.aearost.utils.KettleUtils;
 
 public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
 		
-		new Utils();
+		new ItemUtils();
+		new KettleUtils();
 		
 		// Initialize events	
 		new TeaLeafDrop(this);

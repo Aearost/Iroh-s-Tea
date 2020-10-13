@@ -1,31 +1,26 @@
-package com.aearost.irohstea;
+package com.aearost.utils;
 
 import java.util.HashMap;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Color;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.aearost.items.CactusJuice;
-import com.aearost.items.CauldronInfo;
 import com.aearost.items.Items;
 import com.aearost.items.Tea;
 import com.aearost.items.TeaBag;
 import com.aearost.items.TeaItem;
 import com.aearost.items.TeaLeaf;
 
-public class Utils {
+public class ItemUtils {
 
-	public final static int MAXIMUM_ITEM_AMOUNT = 2034;
 	private final static HashMap<String, ItemStack> itemsToItemStack = new HashMap<String, ItemStack>();
 	public final static HashMap<String, TeaItem> itemsToTea = new HashMap<String, TeaItem>();
-	public final static HashMap<Location, CauldronInfo> locationToCauldronInfo = new HashMap<Location, CauldronInfo>();
-
-	public Utils() {
+	
+	public ItemUtils() {
 		initializeTeas();
 		initializeItemsToItemStack();
 	}
@@ -71,7 +66,7 @@ public class Utils {
 		itemsToItemStack.put(Items.WHITE_JADE_TEA.name(), Tea.getTea(Items.WHITE_JADE_TEA));
 		
 		itemsToItemStack.put(Items.CACTUS_JUICE.name(), CactusJuice.getCactusJuice());
-	}
+	}	
 	
 	public static TeaItem getTeaItem(Items tea) {
 		return itemsToTea.get(tea.name());
@@ -82,48 +77,12 @@ public class Utils {
 		return itemsToItemStack.get(i.name());
 	}
 	
-	public static CauldronInfo getCauldronInfo(Location l) {
-		return locationToCauldronInfo.get(l);
-	}
-	
-	public static void setCauldronInfo(Location l, CauldronInfo ci) {
-		locationToCauldronInfo.put(l, ci);
-	}
-	
-	public static void removeCauldronInfo(Location l) {
-		locationToCauldronInfo.remove(l);
-	}
-	
 	public static String getTeaName(ItemStack is) {
 		String teaName = is.getItemMeta().getDisplayName();
 		teaName = teaName.substring(2, teaName.length() - 4);
 		teaName = teaName.toUpperCase();
 		teaName = teaName.replace(" ", "_");
 		return teaName;
-	}
-	
-	public static HashMap<Location, CauldronInfo> getLocationToCauldronInfo() {
-		return locationToCauldronInfo;
-	}
-	
-	/**
-	 * Allows the formatting of messages to contain Minecraft colors
-	 * 
-	 * @param msg
-	 * @return
-	 */
-	public static String chatMessage(String msg) {
-		return ChatColor.translateAlternateColorCodes('&', "&2[&aIroh's Teas&2] &r" + msg);
-	}
-
-	/**
-	 * Allows the formatting of messages to contain Minecraft colors
-	 * 
-	 * @param msg
-	 * @return
-	 */
-	public static String translateToColor(String msg) {
-		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
 	
 	/**
@@ -188,17 +147,5 @@ public class Utils {
 		}
 		return 0;
 	}
-
-	/**
-	 * Determines if the two items have the same meta values. Amount is not
-	 * considered.
-	 * 
-	 * @param inventoryItem
-	 * @param itemToAdd
-	 * @return
-	 */
-	public static boolean isMatchingItemStack(ItemStack inventoryItem, ItemStack itemToAdd) {
-		return (inventoryItem.getItemMeta().getLore().get(0).equals(itemToAdd.getItemMeta().getLore().get(0))
-				&& inventoryItem.getItemMeta().getDisplayName().equals(itemToAdd.getItemMeta().getDisplayName()));
-	}
+	
 }

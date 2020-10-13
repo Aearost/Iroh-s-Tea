@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.aearost.irohstea.Main;
-import com.aearost.irohstea.Utils;
+import com.aearost.Main;
+import com.aearost.utils.ChatUtils;
 
 public class TeaCrafting implements Listener {
 
@@ -23,7 +23,7 @@ public class TeaCrafting implements Listener {
 		for (ItemStack is : e.getInventory().getContents()) {
 			if (is.getType() == Material.KELP && e.getRecipe().getResult().getType() == Material.PAPER) {
 				if (!is.getItemMeta().hasLore()) {
-					he.sendMessage(Utils.chatMessage("&cYou must use a tea leaf, not kelp!"));
+					he.sendMessage(ChatUtils.chatMessage("&cYou must use a tea leaf, not kelp!"));
 					e.setCancelled(true);
 					return;
 				}

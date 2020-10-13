@@ -14,11 +14,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
-import com.aearost.irohstea.Main;
-import com.aearost.irohstea.Utils;
-import com.aearost.items.CauldronInfo;
+import com.aearost.Main;
 import com.aearost.items.Items;
+import com.aearost.items.Kettle;
 import com.aearost.items.TeaBag;
+import com.aearost.utils.ChatUtils;
+import com.aearost.utils.ItemUtils;
+import com.aearost.utils.KettleUtils;
 
 public class CauldronBrewing implements Listener {
 	public CauldronBrewing(Main plugin) {
@@ -33,7 +35,7 @@ public class CauldronBrewing implements Listener {
 			Location l = b.getLocation();
 			if (b.getType() == Material.CAULDRON) {
 				ItemStack is = p.getInventory().getItemInMainHand();
-				CauldronInfo ci = Utils.getCauldronInfo(l);
+				Kettle ci = KettleUtils.getKettle(l);
 
 				// If the cauldron already contains an item
 				Levelled cauldron = (Levelled) b.getBlockData();
@@ -43,13 +45,13 @@ public class CauldronBrewing implements Listener {
 						if (is.getType() == Material.AIR) {
 							if (ci.getHasBottle()) {
 								l.getWorld().dropItemNaturally(l, new ItemStack(Material.GLASS_BOTTLE, 1));
-								p.sendMessage(Utils.chatMessage("&7You have retrieved the bottle by the kettle"));
+								p.sendMessage(ChatUtils.chatMessage("&7You have retrieved the bottle by the kettle"));
 							} else if (ci.getHasTeaBag()) {
 								l.getWorld().dropItemNaturally(l,
-										TeaBag.getTeaBag(Items.valueOf(Utils.getTeaName(ci.getTea()) + "_TEA")));
-								p.sendMessage(Utils.chatMessage("&7You have taken the tea bag out of the kettle"));
+										TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(ci.getTea()) + "_TEA")));
+								p.sendMessage(ChatUtils.chatMessage("&7You have taken the tea bag out of the kettle"));
 							}
-							Utils.removeCauldronInfo(l);
+							KettleUtils.removeKettle(l);
 							p.playSound(l, Sound.ENTITY_ITEM_PICKUP, 1.0F, 1.0F);
 							return;
 						}
@@ -59,18 +61,18 @@ public class CauldronBrewing implements Listener {
 							if (isFire(b.getWorld().getBlockAt(l.getBlockX(), l.getBlockY() - 1, l.getBlockZ()))) {
 								if (!ci.getHasTeaBag()) {
 									ci.setHasTeaBag(true);
-									String teaName = Utils.getTeaName(is);
-									ItemStack tea = Utils.getItem(teaName);
+									String teaName = ItemUtils.getTeaName(is);
+									ItemStack tea = ItemUtils.getItem(teaName);
 									ci.setTea(tea);
-									Utils.setCauldronInfo(l, ci);
+									KettleUtils.setKettle(l, ci);
 									is.setAmount(is.getAmount() - 1);
-									p.sendMessage(Utils.chatMessage("&aYou have added a tea bag to the kettle!"));
+									p.sendMessage(ChatUtils.chatMessage("&aYou have added a tea bag to the kettle!"));
 								} else {
 									p.sendMessage(
-											Utils.chatMessage("&cYou have already added a tea bag to the kettle!"));
+											ChatUtils.chatMessage("&cYou have already added a tea bag to the kettle!"));
 								}
 							} else {
-								p.sendMessage(Utils.chatMessage("&cThere is no flame beneath the kettle!"));
+								p.sendMessage(ChatUtils.chatMessage("&cThere is no flame beneath the kettle!"));
 								e.setCancelled(true);
 								return;
 							}
@@ -79,47 +81,49 @@ public class CauldronBrewing implements Listener {
 							if (isFire(b.getWorld().getBlockAt(l.getBlockX(), l.getBlockY() - 1, l.getBlockZ()))) {
 								if (!ci.getHasBottle()) {
 									ci.setHasBottle(true);
-									Utils.setCauldronInfo(l, ci);
+									KettleUtils.setKettle(l, ci);
 									is.setAmount(is.getAmount() - 1);
-									p.sendMessage(Utils.chatMessage("&aYou have placed a bottle next to the kettle!"));
+									p.sendMessage(ChatUtils.chatMessage("&aYou have placed a bottle next to the kettle!"));
 								} else {
-									p.sendMessage(Utils.chatMessage("&cYou have already placed a bottle there!"));
+									p.sendMessage(ChatUtils.chatMessage("&cYou have already placed a bottle there!"));
 								}
 							} else {
-								p.sendMessage(Utils.chatMessage("&cThere is no flame beneath the kettle!"));
+								p.sendMessage(ChatUtils.chatMessage("&cThere is no flame beneath the kettle!"));
 								return;
 							}
 						} else {
-							p.sendMessage(Utils.chatMessage("&cThat is not a valid ingredient!"));
-							return;
+							if (is.getType() != Material.WATER_BUCKET) {
+								p.sendMessage(ChatUtils.chatMessage("&cThat is not a valid ingredient!"));
+								return;
+							}
 						}
 					} else {
 						if (isTeaBag(is)) {
 							if (isFire(b.getWorld().getBlockAt(l.getBlockX(), l.getBlockY() - 1, l.getBlockZ()))) {
-								ci = new CauldronInfo(false, true);
+								ci = new Kettle(false, true);
 								ci.setHasTeaBag(true);
-								String teaName = Utils.getTeaName(is);
-								ItemStack tea = Utils.getItem(teaName);
+								String teaName = ItemUtils.getTeaName(is);
+								ItemStack tea = ItemUtils.getItem(teaName);
 								ci.setTea(tea);
-								Utils.setCauldronInfo(l, ci);
+								KettleUtils.setKettle(l, ci);
 								is.setAmount(is.getAmount() - 1);
-								p.sendMessage(Utils.chatMessage("&aYou have added a tea bag to the kettle!"));
+								p.sendMessage(ChatUtils.chatMessage("&aYou have added a tea bag to the kettle!"));
 								p.playSound(l, Sound.ENTITY_ITEM_PICKUP, 1.0F, 0.5F);
 							} else {
-								p.sendMessage(Utils.chatMessage("&cThere is no flame beneath the kettle!"));
+								p.sendMessage(ChatUtils.chatMessage("&cThere is no flame beneath the kettle!"));
 								e.setCancelled(true);
 								return;
 							}
 						} else if (is.getType() == Material.GLASS_BOTTLE) {
 							e.setCancelled(true);
 							if (isFire(b.getWorld().getBlockAt(l.getBlockX(), l.getBlockY() - 1, l.getBlockZ()))) {
-								ci = new CauldronInfo(true, false);
-								Utils.setCauldronInfo(l, ci);
+								ci = new Kettle(true, false);
+								KettleUtils.setKettle(l, ci);
 								is.setAmount(is.getAmount() - 1);
-								p.sendMessage(Utils.chatMessage("&aYou have placed a bottle next to the kettle!"));
+								p.sendMessage(ChatUtils.chatMessage("&aYou have placed a bottle next to the kettle!"));
 								p.playSound(l, Sound.ENTITY_ITEM_PICKUP, 1.0F, 0.5F);
 							} else {
-								p.sendMessage(Utils.chatMessage("&cThere is no flame beneath the kettle!"));
+								p.sendMessage(ChatUtils.chatMessage("&cThere is no flame beneath the kettle!"));
 								e.setCancelled(true);
 								return;
 							}
@@ -128,7 +132,7 @@ public class CauldronBrewing implements Listener {
 
 					// If both ingredients have been put in the cauldron
 					if (ci != null && ci.getHasBottle() && ci.getHasTeaBag()) {
-						p.sendMessage(Utils.chatMessage("&2Your tea has been brewed!"));
+						p.sendMessage(ChatUtils.chatMessage("&2Your tea has been brewed!"));
 
 						// Brew the tea
 						ItemStack tea = ci.getTea();
@@ -137,11 +141,11 @@ public class CauldronBrewing implements Listener {
 						int cauldronRemainder = cauldron.getLevel() - 1;
 						cauldron.setLevel(cauldronRemainder);
 						b.setBlockData(cauldron);
-						Utils.removeCauldronInfo(l);
+						KettleUtils.removeKettle(l);
 					}
 				} else {
 					if (isTeaBag(is) || is.getType() == Material.GLASS_BOTTLE) {
-						p.sendMessage(Utils.chatMessage("&cThere is no water in the cauldron!"));
+						p.sendMessage(ChatUtils.chatMessage("&cThere is no water in the cauldron!"));
 						e.setCancelled(true);
 					}
 				}

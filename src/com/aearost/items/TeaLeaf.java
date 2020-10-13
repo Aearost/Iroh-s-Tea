@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.aearost.irohstea.Utils;
+import com.aearost.utils.ChatUtils;
 
 public class TeaLeaf {
 	
@@ -15,8 +15,8 @@ public class TeaLeaf {
 		ItemMeta meta = tea.getItemMeta();
 		ArrayList<String> s = new ArrayList<>();
 		
-		meta.setDisplayName(Utils.translateToColor(getName()));
-	    s.add(Utils.translateToColor(getLore()));
+		meta.setDisplayName(ChatUtils.translateToColor(getName()));
+	    s.add(ChatUtils.translateToColor(getLore()));
 	    meta.setLore(s);
 	    tea.setItemMeta(meta);
 	    

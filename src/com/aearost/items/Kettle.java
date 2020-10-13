@@ -2,13 +2,13 @@ package com.aearost.items;
 
 import org.bukkit.inventory.ItemStack;
 
-public class CauldronInfo {
+public class Kettle {
 	
 	private boolean hasBottle;
 	private boolean hasTeaBag;
 	private ItemStack tea;
 	
-	public CauldronInfo(boolean hasBottle, boolean hasTeaBag) {
+	public Kettle(boolean hasBottle, boolean hasTeaBag) {
 		this.hasBottle = hasBottle;
 		this.hasTeaBag = hasTeaBag;
 	}

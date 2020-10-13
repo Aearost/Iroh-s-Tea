@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.aearost.irohstea.Utils;
+import com.aearost.utils.ChatUtils;
 
 public class CactusJuice {
 
@@ -23,8 +23,8 @@ public class CactusJuice {
 		meta.setColor(Color.YELLOW);
 		juice.setItemMeta(meta);
 		ArrayList<String> s = new ArrayList<>();
-		meta.setDisplayName(Utils.translateToColor("&2Cactus Juice"));
- 	    s.add(Utils.translateToColor("&a&oDesperate times call for desperate measures..."));
+		meta.setDisplayName(ChatUtils.translateToColor("&2Cactus Juice"));
+ 	    s.add(ChatUtils.translateToColor("&a&oDesperate times call for desperate measures..."));
  	    meta.setLore(s);
  	    juice.setItemMeta(meta);
 		return juice;
