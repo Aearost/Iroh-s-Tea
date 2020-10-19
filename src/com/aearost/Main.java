@@ -25,9 +25,9 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
-		
+		// Initialize Utils
 		new ItemUtils();
-		new KettleUtils();
+		new KettleUtils(true);
 		
 		// Initialize events	
 		new TeaLeafDrop(this);
@@ -53,4 +53,12 @@ public class Main extends JavaPlugin {
 		getCommand("teas").setExecutor(new CommandTeas());
 		getCommand("teas").setTabCompleter(new CommandTeasCompleter());
 	}
+	
+	
+	
+	@Override
+	public void onDisable() {
+		new KettleUtils(false);
+	}
+	
 }

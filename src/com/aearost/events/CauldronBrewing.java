@@ -64,7 +64,7 @@ public class CauldronBrewing implements Listener {
 									String teaName = ItemUtils.getTeaName(is);
 									ItemStack tea = ItemUtils.getItem(teaName);
 									ci.setTea(tea);
-									KettleUtils.setKettle(l, ci);
+									KettleUtils.addKettle(l, ci);
 									is.setAmount(is.getAmount() - 1);
 									p.sendMessage(ChatUtils.chatMessage("&aYou have added a tea bag to the kettle!"));
 								} else {
@@ -81,7 +81,7 @@ public class CauldronBrewing implements Listener {
 							if (isFire(b.getWorld().getBlockAt(l.getBlockX(), l.getBlockY() - 1, l.getBlockZ()))) {
 								if (!ci.getHasBottle()) {
 									ci.setHasBottle(true);
-									KettleUtils.setKettle(l, ci);
+									KettleUtils.addKettle(l, ci);
 									is.setAmount(is.getAmount() - 1);
 									p.sendMessage(ChatUtils.chatMessage("&aYou have placed a bottle next to the kettle!"));
 								} else {
@@ -105,7 +105,7 @@ public class CauldronBrewing implements Listener {
 								String teaName = ItemUtils.getTeaName(is);
 								ItemStack tea = ItemUtils.getItem(teaName);
 								ci.setTea(tea);
-								KettleUtils.setKettle(l, ci);
+								KettleUtils.addKettle(l, ci);
 								is.setAmount(is.getAmount() - 1);
 								p.sendMessage(ChatUtils.chatMessage("&aYou have added a tea bag to the kettle!"));
 								p.playSound(l, Sound.ENTITY_ITEM_PICKUP, 1.0F, 0.5F);
@@ -118,7 +118,7 @@ public class CauldronBrewing implements Listener {
 							e.setCancelled(true);
 							if (isFire(b.getWorld().getBlockAt(l.getBlockX(), l.getBlockY() - 1, l.getBlockZ()))) {
 								ci = new Kettle(true, false);
-								KettleUtils.setKettle(l, ci);
+								KettleUtils.addKettle(l, ci);
 								is.setAmount(is.getAmount() - 1);
 								p.sendMessage(ChatUtils.chatMessage("&aYou have placed a bottle next to the kettle!"));
 								p.playSound(l, Sound.ENTITY_ITEM_PICKUP, 1.0F, 0.5F);
