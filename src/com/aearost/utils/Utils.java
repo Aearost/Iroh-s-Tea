@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 public class Utils {
 
 	public final static int MAXIMUM_ITEM_AMOUNT = 2034;
+	public final static int DROP_RATE_MODIFIER = 2;
 
 	/**
 	 * Determines if the two items have the same meta values. Amount is not

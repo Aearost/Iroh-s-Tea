@@ -19,9 +19,9 @@ public abstract class TeaBag {
 		ItemMeta meta = bag.getItemMeta();
 		
 		meta.setDisplayName(ChatUtils.translateToColor(teaBagName));
-		ArrayList<String> s = new ArrayList<>();
- 	    s.add(ChatUtils.translateToColor(teaItem.getLore()));
- 	    meta.setLore(s);
+		ArrayList<String> lore = new ArrayList<>();
+ 	    lore.add(ChatUtils.translateToColor(teaItem.getLore()));
+ 	    meta.setLore(lore);
 	    bag.setItemMeta(meta);
 	    
 	    return bag;

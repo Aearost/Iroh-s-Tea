@@ -13,11 +13,11 @@ public class TeaLeaf {
 	public static ItemStack getTeaLeaf() {
 		ItemStack tea = new ItemStack(Material.KELP, 1);
 		ItemMeta meta = tea.getItemMeta();
-		ArrayList<String> s = new ArrayList<>();
+		ArrayList<String> lore = new ArrayList<>();
 		
 		meta.setDisplayName(ChatUtils.translateToColor(getName()));
-	    s.add(ChatUtils.translateToColor(getLore()));
-	    meta.setLore(s);
+	    lore.add(ChatUtils.translateToColor(getLore()));
+	    meta.setLore(lore);
 	    tea.setItemMeta(meta);
 	    
 	    return tea;

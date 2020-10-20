@@ -19,16 +19,16 @@ public class KettleUtils {
 
 	}
 
-	public static Kettle getKettle(Location l) {
-		return locationToKettle.get(l);
+	public static Kettle getKettle(Location location) {
+		return locationToKettle.get(location);
 	}
 
-	public static void addKettle(Location l, Kettle ci) {
-		locationToKettle.put(l, ci);
+	public static void addKettle(Location location, Kettle kettle) {
+		locationToKettle.put(location, kettle);
 	}
 
-	public static void removeKettle(Location l) {
-		locationToKettle.remove(l);
+	public static void removeKettle(Location location) {
+		locationToKettle.remove(location);
 	}
 
 	public static HashMap<Location, Kettle> getLocationToKettle() {

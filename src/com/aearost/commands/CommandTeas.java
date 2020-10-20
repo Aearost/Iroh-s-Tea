@@ -40,8 +40,7 @@ public class CommandTeas implements CommandExecutor {
 				sender.sendMessage(ChatUtils.chatMessage("&aA recipe book has been added to your inventory!"));
 				return true;
 			}
-		}
-		else if (args[0].equals("give")) {
+		} else if (args[0].equals("give")) {
 			if (!sender.hasPermission("irohsteas.admin.give")) {
 				sender.sendMessage(ChatUtils.chatMessage("&cYou do not have permission to use this command!"));
 				return false;
@@ -49,8 +48,8 @@ public class CommandTeas implements CommandExecutor {
 			if (args.length >= 3) {
 				// Creates a list of all Items
 				List<String> itemsAsList = new ArrayList<>();
-				for (Items i : Items.values()) {
-					itemsAsList.add(i.name());
+				for (Items item : Items.values()) {
+					itemsAsList.add(item.name());
 				}
 
 				if (!itemsAsList.contains(args[2].toUpperCase())) {
@@ -93,48 +92,49 @@ public class CommandTeas implements CommandExecutor {
 				return false;
 			}
 			if (args.length == 2) {
-				Map<Location, Kettle> locationToCauldronInfo = (Map<Location, Kettle>) KettleUtils
-						.getLocationToKettle().clone();
+				Map<Location, Kettle> locationToKettle = (Map<Location, Kettle>) KettleUtils.getLocationToKettle().clone();
 				if (args[1].equals("display")) {
-					if (locationToCauldronInfo.size() == 0) {
+					if (locationToKettle.size() == 0) {
 						sender.sendMessage(ChatUtils.chatMessage("&7There are currently no active kettles"));
 						return true;
 					}
 					sender.sendMessage(ChatUtils.translateToColor("&e         - - &6&lActive Kettles &e- -"));
 					int i = 1;
-					for (Map.Entry<Location, Kettle> entry : locationToCauldronInfo.entrySet()) {
+					for (Map.Entry<Location, Kettle> entry : locationToKettle.entrySet()) {
 						Location l = entry.getKey();
 						if (entry.getValue().getHasBottle()) {
-							sender.sendMessage(ChatUtils.translateToColor("&6" + i + ". &ex: " + l.getBlockX() + " | y: "
-									+ l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Empty bottle)"));
+							sender.sendMessage(ChatUtils.translateToColor("&6" + i + ". &ex: " + l.getBlockX()
+									+ " | y: " + l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Empty bottle)"));
 						} else if (entry.getValue().getHasTeaBag()) {
-							sender.sendMessage(ChatUtils.translateToColor("&6" + i + ". &ex: " + l.getBlockX() + " | y: "
-									+ l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Tea bag)"));
+							sender.sendMessage(ChatUtils.translateToColor("&6" + i + ". &ex: " + l.getBlockX()
+									+ " | y: " + l.getBlockY() + " | z: " + l.getBlockZ() + " &7(Tea bag)"));
 						}
 						i++;
 					}
 					return true;
 				} else if (args[1].equals("removeall")) {
-					if (locationToCauldronInfo.size() == 0) {
+					if (locationToKettle.size() == 0) {
 						sender.sendMessage(ChatUtils.chatMessage("&7There are currently no active kettles"));
 						return false;
 					}
-					for (Map.Entry<Location, Kettle> entry : locationToCauldronInfo.entrySet()) {
-						Location l = entry.getKey();
-						if (l.getChunk().isLoaded()) {
-							Kettle ci = KettleUtils.getKettle(l);
-							if (ci.getHasBottle()) {
-								l.getWorld().dropItemNaturally(l, new ItemStack(Material.GLASS_BOTTLE, 1));
-							} else if (ci.getHasTeaBag()) {
-								l.getWorld().dropItemNaturally(l, TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(ci.getTea()) + "_TEA")));
+					for (Map.Entry<Location, Kettle> entry : locationToKettle.entrySet()) {
+						Location location = entry.getKey();
+						if (location.getChunk().isLoaded()) {
+							Kettle kettle = KettleUtils.getKettle(location);
+							if (kettle.getHasBottle()) {
+								location.getWorld().dropItemNaturally(location, new ItemStack(Material.GLASS_BOTTLE, 1));
+							} else if (kettle.getHasTeaBag()) {
+								location.getWorld().dropItemNaturally(location,
+										TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
 							}
 						}
-						KettleUtils.removeKettle(l);
+						KettleUtils.removeKettle(location);
 					}
 					sender.sendMessage(ChatUtils.chatMessage("&aAll kettles have been removed"));
 					return true;
 				} else if (args[1].equals("remove")) {
-					sender.sendMessage(ChatUtils.translateToColor("&aProper Usage: &6/teas &ekettles remove <x> <y> <z>"));
+					sender.sendMessage(
+							ChatUtils.translateToColor("&aProper Usage: &6/teas &ekettles remove <x> <y> <z>"));
 					return false;
 				}
 			} else if (args.length == 5 && args[1].equals("remove")) {
@@ -161,19 +161,20 @@ public class CommandTeas implements CommandExecutor {
 					sender.sendMessage(ChatUtils.chatMessage("&cThis command can only be executed by a player!"));
 					return false;
 				} else {
-					Location l = new Location(((Player) sender).getWorld(), x, y, z);
-					Kettle ci = KettleUtils.getKettle(l);
-					if (ci != null) {
+					Location location = new Location(((Player) sender).getWorld(), x, y, z);
+					Kettle kettle = KettleUtils.getKettle(location);
+					if (kettle != null) {
 						sender.sendMessage(ChatUtils.chatMessage(
 								"&7The kettle at &fx: " + x + " | y: " + y + " | z: " + z + " &7has been deleted"));
-						if (l.getChunk().isLoaded()) {
-							if (ci.getHasBottle()) {
-								l.getWorld().dropItemNaturally(l, new ItemStack(Material.GLASS_BOTTLE, 1));
-							} else if (ci.getHasTeaBag()) {
-								l.getWorld().dropItemNaturally(l, TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(ci.getTea()) + "_TEA")));
+						if (location.getChunk().isLoaded()) {
+							if (kettle.getHasBottle()) {
+								location.getWorld().dropItemNaturally(location, new ItemStack(Material.GLASS_BOTTLE, 1));
+							} else if (kettle.getHasTeaBag()) {
+								location.getWorld().dropItemNaturally(location,
+										TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
 							}
 						}
-						KettleUtils.removeKettle(l);
+						KettleUtils.removeKettle(location);
 						return true;
 					} else {
 						sender.sendMessage(ChatUtils.chatMessage(
@@ -257,20 +258,22 @@ public class CommandTeas implements CommandExecutor {
 		// If someone else (including console) gave them the item
 		String itemName = itemToGive.getItemMeta().getDisplayName();
 		if (remainingAmount == 0) {
-			target.sendMessage(
-					ChatUtils.chatMessage("&6You have been given &a" + itemToGive.getAmount() + " " + itemName + "&6!"));
+			target.sendMessage(ChatUtils
+					.chatMessage("&6You have been given &a" + itemToGive.getAmount() + " " + itemName + "&6!"));
 			sender.sendMessage(ChatUtils.chatMessage("&e" + target.getName() + " &6has been given &a"
 					+ itemToGive.getAmount() + " " + itemName + "&6!"));
 			return true;
 		} else if (remainingAmount > 0) {
 			int amountGiven = itemToGive.getAmount() - remainingAmount;
-			target.sendMessage(ChatUtils.chatMessage("&6You have been given &a" + amountGiven + " " + itemName + "&6!"));
+			target.sendMessage(
+					ChatUtils.chatMessage("&6You have been given &a" + amountGiven + " " + itemName + "&6!"));
 			sender.sendMessage(ChatUtils.chatMessage(
 					"&e" + target.getName() + " &6has been given &a" + amountGiven + " " + itemName + "&6!"));
 			sender.sendMessage(ChatUtils.chatMessage("&a" + remainingAmount + " " + itemName + " &6was thrown away!"));
 			return true;
 		} else {
-			sender.sendMessage(ChatUtils.chatMessage("&7" + target.getName() + " &cdoes not have enough space for that!"));
+			sender.sendMessage(
+					ChatUtils.chatMessage("&7" + target.getName() + " &cdoes not have enough space for that!"));
 			return false;
 		}
 	}

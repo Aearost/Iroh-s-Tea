@@ -12,9 +12,9 @@ public class RecipeBook {
 	
 	public static ItemStack getRecipeBook() {
 		ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
-		BookMeta bm = (BookMeta) book.getItemMeta();
-		bm.setTitle(ChatUtils.translateToColor("&2A Guide to Happiness"));
-		bm.setAuthor(ChatUtils.translateToColor("&8Uncle Iroh"));
+		BookMeta meta = (BookMeta) book.getItemMeta();
+		meta.setTitle(ChatUtils.translateToColor("&2A Guide to Happiness"));
+		meta.setAuthor(ChatUtils.translateToColor("&8Uncle Iroh"));
 		ArrayList<String> pages = new ArrayList<String>();
 		
 		// Maximum of 256 characters per page!
@@ -31,9 +31,9 @@ public class RecipeBook {
 		
 		pages.add(ChatUtils.translateToColor("&l&nCactus Juice\n\n&r&oDesperate times call for desperate measures...\n\n&rIngredients:\n - 4 cactus\n\nEffects:\n- Nausea V (120s)\n- Slowness III (180s)\n- Weakness V (180s)\n- Night Vision (10s)"));
 		
-		bm.setPages(pages);
+		meta.setPages(pages);
 		
-		book.setItemMeta(bm);
+		book.setItemMeta(meta);
 		return book;
 	}
 	

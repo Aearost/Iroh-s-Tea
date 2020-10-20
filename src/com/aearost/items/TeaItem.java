@@ -8,15 +8,15 @@ public class TeaItem {
 	private String name;
 	private String teaBagName;
 	private String lore;
-	private PotionEffect pe;
-	private Color c;
+	private PotionEffect potionEffect;
+	private Color color;
 	
 	public TeaItem(String name, String lore, PotionEffect pe, Color c) {
 		this.name = name;
 		this.teaBagName = name + " Bag";
 		this.lore = lore;
-		this.pe = pe;
-		this.c = c;
+		this.potionEffect = pe;
+		this.color = c;
 	}
 	
 	public String getName() {
@@ -32,11 +32,11 @@ public class TeaItem {
 	}
 	
 	public PotionEffect getPotionEffect() {
-		return pe;
+		return potionEffect;
 	}
 	
 	public Color getColor() {
-		return c;
+		return color;
 	}
 }
 	

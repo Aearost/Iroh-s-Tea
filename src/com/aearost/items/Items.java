@@ -1,8 +1,10 @@
 package com.aearost.items;
 
 public enum Items {
+	// Basic Items
 	TEA_LEAF,
 	
+	// Tea Bags
 	GREEN_TEA_BAG,
 	JASMINE_TEA_BAG,
 	APPLE_CINNAMON_TEA_BAG,
@@ -12,6 +14,7 @@ public enum Items {
 	WHITE_DRAGON_TEA_BAG,
 	WHITE_JADE_TEA_BAG,
 	
+	// Teas
 	GREEN_TEA,
 	JASMINE_TEA,
 	APPLE_CINNAMON_TEA,
@@ -21,5 +24,6 @@ public enum Items {
 	WHITE_DRAGON_TEA,
 	WHITE_JADE_TEA,
 	
+	// Other Drinks
 	CACTUS_JUICE
 }

@@ -24,21 +24,21 @@ public class CauldronDestroy implements Listener {
 	
 	@EventHandler
 	public void onCauldronDestroy(final BlockBreakEvent e) {
-		Block b = e.getBlock();
-		if (b.getType() == Material.CAULDRON) {
-			Location l = b.getLocation();
-			Kettle ci = KettleUtils.getKettle(l);
+		Block block = e.getBlock();
+		if (block.getType() == Material.CAULDRON) {
+			Location location = block.getLocation();
+			Kettle kettle = KettleUtils.getKettle(location);
 			
-			if (ci == null) {
+			if (kettle == null) {
 				return;
 			}
 			
-			if (ci.getHasBottle()) {
-				l.getWorld().dropItemNaturally(l, new ItemStack(Material.GLASS_BOTTLE, 1));
-			} else if (ci.getHasTeaBag()) {
-				l.getWorld().dropItemNaturally(l, TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(ci.getTea()) + "_TEA")));
+			if (kettle.getHasBottle()) {
+				location.getWorld().dropItemNaturally(location, new ItemStack(Material.GLASS_BOTTLE, 1));
+			} else if (kettle.getHasTeaBag()) {
+				location.getWorld().dropItemNaturally(location, TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
 			}
-			KettleUtils.removeKettle(l);
+			KettleUtils.removeKettle(location);
 		}
 	}
 	

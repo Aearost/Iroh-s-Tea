@@ -19,11 +19,11 @@ public class TeaCrafting implements Listener {
 	
 	@EventHandler
 	public void onCraftTea(final CraftItemEvent e) {
-		HumanEntity he = e.getWhoClicked();
+		HumanEntity player = e.getWhoClicked();
 		for (ItemStack is : e.getInventory().getContents()) {
 			if (is.getType() == Material.KELP && e.getRecipe().getResult().getType() == Material.PAPER) {
 				if (!is.getItemMeta().hasLore()) {
-					he.sendMessage(ChatUtils.chatMessage("&cYou must use a tea leaf, not kelp!"));
+					player.sendMessage(ChatUtils.chatMessage("&cYou must use a tea leaf, not kelp!"));
 					e.setCancelled(true);
 					return;
 				}

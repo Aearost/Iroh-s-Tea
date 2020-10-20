@@ -25,6 +25,7 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
+		
 		// Initialize Utils
 		new ItemUtils();
 		new KettleUtils(true);
@@ -47,14 +48,10 @@ public class Main extends JavaPlugin {
 		
 		new CactusJuiceRecipe(this);
 		
-		
-		
 		// Initialize commands
 		getCommand("teas").setExecutor(new CommandTeas());
 		getCommand("teas").setTabCompleter(new CommandTeasCompleter());
 	}
-	
-	
 	
 	@Override
 	public void onDisable() {

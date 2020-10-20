@@ -45,8 +45,10 @@ public class ItemUtils {
 	}
 	
 	private void initializeItemsToItemStack() {
+		// Basic Items
 		itemsToItemStack.put(Items.TEA_LEAF.name(), TeaLeaf.getTeaLeaf());
 		
+		// Tea Bags
 		itemsToItemStack.put(Items.APPLE_CINNAMON_TEA_BAG.name(), TeaBag.getTeaBag(Items.APPLE_CINNAMON_TEA));
 		itemsToItemStack.put(Items.CHOCOLATE_TEA_BAG.name(), TeaBag.getTeaBag(Items.CHOCOLATE_TEA));
 		itemsToItemStack.put(Items.GREEN_TEA_BAG.name(), TeaBag.getTeaBag(Items.GREEN_TEA));
@@ -56,6 +58,7 @@ public class ItemUtils {
 		itemsToItemStack.put(Items.WHITE_DRAGON_TEA_BAG.name(), TeaBag.getTeaBag(Items.WHITE_DRAGON_TEA));
 		itemsToItemStack.put(Items.WHITE_JADE_TEA_BAG.name(), TeaBag.getTeaBag(Items.WHITE_JADE_TEA));
 		
+		// Teas
 		itemsToItemStack.put(Items.APPLE_CINNAMON_TEA.name(), Tea.getTea(Items.APPLE_CINNAMON_TEA));
 		itemsToItemStack.put(Items.CHOCOLATE_TEA.name(), Tea.getTea(Items.CHOCOLATE_TEA));
 		itemsToItemStack.put(Items.GREEN_TEA.name(), Tea.getTea(Items.GREEN_TEA));
@@ -65,6 +68,7 @@ public class ItemUtils {
 		itemsToItemStack.put(Items.WHITE_DRAGON_TEA.name(), Tea.getTea(Items.WHITE_DRAGON_TEA));
 		itemsToItemStack.put(Items.WHITE_JADE_TEA.name(), Tea.getTea(Items.WHITE_JADE_TEA));
 		
+		// Other Drinks
 		itemsToItemStack.put(Items.CACTUS_JUICE.name(), CactusJuice.getCactusJuice());
 	}	
 	

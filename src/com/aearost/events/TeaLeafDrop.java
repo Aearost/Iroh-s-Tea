@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.aearost.Main;
 import com.aearost.items.TeaLeaf;
+import com.aearost.utils.Utils;
 
 public class TeaLeafDrop implements Listener {
 
@@ -22,18 +23,19 @@ public class TeaLeafDrop implements Listener {
 	
 	@EventHandler
 	public void onGrassDestroy(final BlockBreakEvent e) {
-		Block b = e.getBlock();
-		Location l = b.getLocation();
+		Block block = e.getBlock();
+		Location location = block.getLocation();
 		
 		boolean teaLeafWillDrop = false;
-		if (b.getType() == Material.GRASS) {
+		if (block.getType() == Material.GRASS) {
 			teaLeafWillDrop = determineIfDropTea(1);
-		} else if (b.getType() == Material.TALL_GRASS) {
-			teaLeafWillDrop = determineIfDropTea(2);
+		} else if (block.getType() == Material.TALL_GRASS) {
+			teaLeafWillDrop = determineIfDropTea(Utils.DROP_RATE_MODIFIER);
 		}
+		
 		if (teaLeafWillDrop) {
 			ItemStack teaLeaf = TeaLeaf.getTeaLeaf();
-			b.getWorld().dropItemNaturally(l, teaLeaf);
+			block.getWorld().dropItemNaturally(location, teaLeaf);
 		}
 	}
 	
