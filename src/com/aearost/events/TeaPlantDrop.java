@@ -12,17 +12,17 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.aearost.Main;
-import com.aearost.items.TeaLeaf;
+import com.aearost.items.TeaPlant;
 import com.aearost.utils.Utils;
 
-public class TeaLeafDrop implements Listener {
+public class TeaPlantDrop implements Listener {
 
-	public TeaLeafDrop(Main plugin) {
+	public TeaPlantDrop(Main plugin) {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
 	
 	/**
-	 * Handles the dropping of tea leaves when destroying grass.
+	 * Handles the dropping of tea plants when destroying grass.
 	 * 
 	 * @param e
 	 */
@@ -31,25 +31,26 @@ public class TeaLeafDrop implements Listener {
 		Block block = e.getBlock();
 		Location location = block.getLocation();
 		
-		boolean teaLeafWillDrop = false;
+		boolean teaPlantWillDrop = false;
 		if (block.getType() == Material.GRASS) {
-			teaLeafWillDrop = determineIfDropTea(1);
+			teaPlantWillDrop = determineIfDropTeaPlant(1);
 		} else if (block.getType() == Material.TALL_GRASS) {
-			teaLeafWillDrop = determineIfDropTea(Utils.DROP_RATE_MODIFIER);
+			teaPlantWillDrop = determineIfDropTeaPlant(Utils.DROP_RATE_MODIFIER);
 		}
 		
-		if (teaLeafWillDrop) {
-			ItemStack teaLeaf = TeaLeaf.getTeaLeaf();
-			block.getWorld().dropItemNaturally(location, teaLeaf);
+		if (teaPlantWillDrop) {
+			ItemStack teaPlant = TeaPlant.getTeaPlant();
+			block.getWorld().dropItemNaturally(location, teaPlant);
 		}
 	}
 	
 	/**
-	 * Determines whether or not to drop a tea leaf.
+	 * Determines whether or not to drop a tea plant.
+	 * 
 	 * @param modifier
 	 * @return
 	 */
-	private boolean determineIfDropTea(int modifier) {
-		return new Random().nextInt(100) + 1 < (4 * modifier);
+	private boolean determineIfDropTeaPlant(int modifier) {
+		return new Random().nextInt(100) + 1 < (3 * modifier);
 	}
 }

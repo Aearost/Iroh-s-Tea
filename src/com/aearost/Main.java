@@ -8,7 +8,7 @@ import com.aearost.commands.CommandTeasCompleter;
 import com.aearost.events.CauldronBrewing;
 import com.aearost.events.CauldronDestroy;
 import com.aearost.events.TeaCrafting;
-import com.aearost.events.TeaLeafDrop;
+import com.aearost.events.TeaPlantDrop;
 import com.aearost.recipes.AppleCinnamonTeaRecipe;
 import com.aearost.recipes.CactusJuiceRecipe;
 import com.aearost.recipes.ChocolateTeaRecipe;
@@ -31,7 +31,7 @@ public class Main extends JavaPlugin {
 		new KettleUtils(true);
 		
 		// Initialize events	
-		new TeaLeafDrop(this);
+		new TeaPlantDrop(this);
 		new TeaCrafting(this);
 		new CauldronBrewing(this);
 		new CauldronDestroy(this);
