@@ -51,6 +51,6 @@ public class TeaPlantDrop implements Listener {
 	 * @return
 	 */
 	private boolean determineIfDropTeaPlant(int modifier) {
-		return new Random().nextInt(100) + 1 < (3 * modifier);
+		return new Random().nextInt(100) + 1 < (4 * modifier);
 	}
 }

@@ -190,4 +190,15 @@ public class FileUtils {
 		}
 	}
 
+	
+	
+	
+	public static void readFromTeaPlantFile() {
+		
+	}
+	
+	public static void writeToTeaPlantFile() {
+		
+	}
+	
 }

@@ -9,6 +9,9 @@ import com.aearost.events.CauldronBrewing;
 import com.aearost.events.CauldronDestroy;
 import com.aearost.events.TeaCrafting;
 import com.aearost.events.TeaPlantDrop;
+import com.aearost.events.TeaPlantGrow;
+import com.aearost.events.TeaPlantHarvest;
+import com.aearost.events.TeaPlantPlace;
 import com.aearost.recipes.AppleCinnamonTeaRecipe;
 import com.aearost.recipes.CactusJuiceRecipe;
 import com.aearost.recipes.ChocolateTeaRecipe;
@@ -20,6 +23,7 @@ import com.aearost.recipes.WhiteDragonTeaRecipe;
 import com.aearost.recipes.WhiteJadeTeaRecipe;
 import com.aearost.utils.ItemUtils;
 import com.aearost.utils.KettleUtils;
+import com.aearost.utils.TeaPlantUtils;
 
 public class Main extends JavaPlugin {
 	
@@ -29,12 +33,17 @@ public class Main extends JavaPlugin {
 		// Initialize Utils
 		new ItemUtils();
 		new KettleUtils(true);
+		new TeaPlantUtils(true);
 		
 		// Initialize events	
 		new TeaPlantDrop(this);
+		new TeaPlantPlace(this);
+		new TeaPlantGrow(this);
+		new TeaPlantHarvest(this);
 		new TeaCrafting(this);
 		new CauldronBrewing(this);
 		new CauldronDestroy(this);
+		
 		
 		// Crafting Recipes
 		new AppleCinnamonTeaRecipe(this);
