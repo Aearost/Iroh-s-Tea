@@ -15,6 +15,11 @@ public class JasmineTeaRecipe {
 		createRecipe(plugin);
 	}
 	
+	/**
+	 * Creates the recipe for the Jasmine Tea Bag.
+	 * 
+	 * @param plugin
+	 */
 	private void createRecipe(Plugin plugin) {
 		NamespacedKey nk = new NamespacedKey(plugin, "JASMINE_TEA");
 		

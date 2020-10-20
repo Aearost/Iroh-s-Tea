@@ -22,6 +22,13 @@ public class CauldronDestroy implements Listener {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
 	
+	/**
+	 * Handles the destroying of a cauldron.
+	 * 
+	 * If the cauldron contained an item, it will be dropped as well.
+	 * 
+	 * @param e
+	 */
 	@EventHandler
 	public void onCauldronDestroy(final BlockBreakEvent e) {
 		Block block = e.getBlock();

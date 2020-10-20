@@ -24,7 +24,9 @@ import com.aearost.utils.Utils;
 
 public class CommandTeas implements CommandExecutor {
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * All logic behind the /teas command, and all of its sub-commands as well.
+	 */
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
@@ -39,6 +41,8 @@ public class CommandTeas implements CommandExecutor {
 				((Player) sender).getInventory().addItem(RecipeBook.getRecipeBook());
 				sender.sendMessage(ChatUtils.chatMessage("&aA recipe book has been added to your inventory!"));
 				return true;
+			} else {
+				sender.sendMessage(ChatUtils.chatMessage("&cYou must be a player to use this command!"));
 			}
 		} else if (args[0].equals("give")) {
 			if (!sender.hasPermission("irohsteas.admin.give")) {
@@ -92,6 +96,7 @@ public class CommandTeas implements CommandExecutor {
 				return false;
 			}
 			if (args.length == 2) {
+				@SuppressWarnings("unchecked")
 				Map<Location, Kettle> locationToKettle = (Map<Location, Kettle>) KettleUtils.getLocationToKettle().clone();
 				if (args[1].equals("display")) {
 					if (locationToKettle.size() == 0) {

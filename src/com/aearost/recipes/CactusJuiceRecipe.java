@@ -14,6 +14,11 @@ public class CactusJuiceRecipe {
 		createRecipe(plugin);
 	}
 	
+	/**
+	 * Creates the recipe for the Cactus Juice.
+	 * 
+	 * @param plugin
+	 */
 	private void createRecipe(Plugin plugin) {
 		NamespacedKey nk = new NamespacedKey(plugin, "CACTUS_JUICE");
 		ItemStack juice = CactusJuice.getCactusJuice();

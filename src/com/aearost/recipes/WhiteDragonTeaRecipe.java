@@ -15,6 +15,11 @@ public class WhiteDragonTeaRecipe {
 		createRecipe(plugin);
 	}
 	
+	/**
+	 * Creates the recipe for the White Dragon Tea Bag
+	 * 
+	 * @param plugin
+	 */
 	private void createRecipe(Plugin plugin) {
 		NamespacedKey nk = new NamespacedKey(plugin, "WHITE_DRAGON_TEA");
 		

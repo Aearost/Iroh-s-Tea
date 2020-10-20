@@ -15,6 +15,11 @@ public class WhiteJadeTeaRecipe {
 		createRecipe(plugin);
 	}
 	
+	/**
+	 * Creates the recipe for the White Jade Tea Bag
+	 * 
+	 * @param plugin
+	 */
 	private void createRecipe(Plugin plugin) {
 		NamespacedKey nk = new NamespacedKey(plugin, "WHITE_JADE_TEA");
 		

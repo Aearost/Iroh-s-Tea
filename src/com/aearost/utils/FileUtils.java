@@ -17,7 +17,13 @@ import com.aearost.items.Kettle;
 
 public class FileUtils {
 
-	@SuppressWarnings("resource")
+	/**
+	 * Initializes the locationToKettles HashMap based on the kettles.json file.
+	 * 
+	 * After all kettles have been iterated, the file is deleted.
+	 * 
+	 * @param plugin
+	 */
 	public static void readFromKettleFile() {
 		String currentPath = System.getProperty("user.dir");
 		String filePath = currentPath + File.separator + "plugins" + File.separator + "IrohsTea" + File.separator
@@ -33,7 +39,7 @@ public class FileUtils {
 		try {
 			reader = new Scanner(file);
 			int fieldCount = 0;
-			
+
 			World world = null;
 			int x = 0;
 			int y = 0;
@@ -41,12 +47,12 @@ public class FileUtils {
 			boolean hasBottle = false;
 			boolean hasTeaBag = false;
 			ItemStack tea = null;
-			
+
 			while (reader.hasNextLine()) {
 				String line = reader.nextLine();
 				String fieldName = null;
 				String fieldValue = null;
-				
+
 				if (line.endsWith("\",")) {
 					String[] parts = line.split("\"");
 					fieldName = parts[1];
@@ -54,7 +60,7 @@ public class FileUtils {
 				} else {
 					continue;
 				}
-				
+
 				if (fieldName.equals("worldName")) {
 					world = Bukkit.getWorld(fieldValue);
 				} else if (fieldName.equals("x")) {
@@ -72,11 +78,12 @@ public class FileUtils {
 						tea = ItemUtils.getItem(fieldValue + "_TEA");
 					}
 				} else {
+					reader.close();
 					throw new FileNotFoundException();
 				}
-				
+
 				fieldCount++;
-				
+
 				if (fieldCount == 7) {
 					Location location = new Location(world, x, y, z);
 					Kettle kettle = null;
@@ -97,6 +104,12 @@ public class FileUtils {
 		}
 	}
 
+	/**
+	 * Writes to the kettles.json file based on the contents of the locationToKettle
+	 * HashMap.
+	 * 
+	 * @param plugin
+	 */
 	public static void writeToKettleFile() {
 		HashMap<Location, Kettle> locationToKettle = KettleUtils.getLocationToKettle();
 		if (locationToKettle.size() > 0) {
@@ -176,5 +189,5 @@ public class FileUtils {
 			}
 		}
 	}
-	
+
 }

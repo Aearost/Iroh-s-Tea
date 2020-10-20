@@ -15,6 +15,11 @@ public class T8TeaRecipe {
 		createRecipe(plugin);
 	}
 	
+	/**
+	 * Creates the recipe for the T8 Tea Bag
+	 * 
+	 * @param plugin
+	 */
 	private void createRecipe(Plugin plugin) {
 		NamespacedKey nk = new NamespacedKey(plugin, "T8_TEA");
 		

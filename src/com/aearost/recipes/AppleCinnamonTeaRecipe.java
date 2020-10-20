@@ -15,6 +15,11 @@ public class AppleCinnamonTeaRecipe {
 		createRecipe(plugin);
 	}
 	
+	/**
+	 * Creates the recipe for the Apple Cinnamon Tea Bag.
+	 * 
+	 * @param plugin
+	 */
 	private void createRecipe(Plugin plugin) {
 		NamespacedKey nk = new NamespacedKey(plugin, "APPLE_CINNAMON_TEA");
 		

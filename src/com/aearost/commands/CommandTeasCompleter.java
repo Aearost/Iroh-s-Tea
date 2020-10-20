@@ -13,16 +13,19 @@ import com.aearost.items.Items;
 
 public class CommandTeasCompleter implements TabCompleter {
 
+	/**
+	 * Handles the auto complete functionality while using the /teas command, and
+	 * all of its sub-commands.
+	 */
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		List<String> displayedOptions = new ArrayList<>();
-		
+
 		if ("book".startsWith(args[0]) && args[0].length() > 0) {
 			if (args.length == 1) {
 				displayedOptions.add("book");
 			}
-		}
-		else if ("give".startsWith(args[0]) && args[0].length() > 0) {
+		} else if ("give".startsWith(args[0]) && args[0].length() > 0) {
 			if (args.length == 1) {
 				displayedOptions.add("give");
 			}
@@ -37,7 +40,8 @@ public class CommandTeasCompleter implements TabCompleter {
 				}
 			}
 			// If the input player exists
-			else if (args.length == 3 && args[0].equals("give") && Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1]))) {
+			else if (args.length == 3 && args[0].equals("give")
+					&& Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1]))) {
 				for (Items i : Items.values()) {
 					if (i.name().toLowerCase().startsWith(args[2].toLowerCase())) {
 						displayedOptions.add(i.name());
@@ -51,13 +55,11 @@ public class CommandTeasCompleter implements TabCompleter {
 					displayedOptions.add("64");
 				}
 			}
-			
-			
+
 		} else if ("kettles".startsWith(args[0]) && args[0].length() > 0) {
 			if (args.length == 1) {
 				displayedOptions.add("kettles");
-			}
-			else if (args.length == 2) {
+			} else if (args.length == 2) {
 				if ("display".startsWith(args[1]) && args[1].length() > 0) {
 					displayedOptions.add("display");
 				} else if ("remove".startsWith(args[1]) && args[1].length() > 0) {
@@ -82,8 +84,8 @@ public class CommandTeasCompleter implements TabCompleter {
 			displayedOptions.add("give");
 			displayedOptions.add("kettles");
 		}
-		
+
 		return displayedOptions;
 	}
-	
+
 }

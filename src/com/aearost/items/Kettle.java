@@ -4,6 +4,13 @@ import org.bukkit.inventory.ItemStack;
 
 import com.aearost.utils.ItemUtils;
 
+/**
+ * Kettles are used to distinguish an ordinary cauldron from one that stores
+ * data related to teas.
+ * 
+ * @author Aearost
+ *
+ */
 public class Kettle {
 
 	private boolean hasBottle;

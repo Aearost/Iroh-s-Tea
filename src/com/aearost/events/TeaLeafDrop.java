@@ -21,6 +21,11 @@ public class TeaLeafDrop implements Listener {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
 	
+	/**
+	 * Handles the dropping of tea leaves when destroying grass.
+	 * 
+	 * @param e
+	 */
 	@EventHandler
 	public void onGrassDestroy(final BlockBreakEvent e) {
 		Block block = e.getBlock();
@@ -39,6 +44,11 @@ public class TeaLeafDrop implements Listener {
 		}
 	}
 	
+	/**
+	 * Determines whether or not to drop a tea leaf.
+	 * @param modifier
+	 * @return
+	 */
 	private boolean determineIfDropTea(int modifier) {
 		return new Random().nextInt(100) + 1 < (4 * modifier);
 	}

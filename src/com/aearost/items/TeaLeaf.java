@@ -10,6 +10,10 @@ import com.aearost.utils.ChatUtils;
 
 public class TeaLeaf {
 	
+	/**
+	 * Returns an ItemStack of a single Tea Leaf.
+	 * @return
+	 */
 	public static ItemStack getTeaLeaf() {
 		ItemStack tea = new ItemStack(Material.KELP, 1);
 		ItemMeta meta = tea.getItemMeta();

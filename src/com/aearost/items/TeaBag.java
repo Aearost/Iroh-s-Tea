@@ -11,6 +11,12 @@ import com.aearost.utils.ItemUtils;
 
 public abstract class TeaBag {
 	
+	/**
+	 * Returns an ItemStack of the input tea, representing a tea bag.
+	 * 
+	 * @param teaItemName
+	 * @return
+	 */
 	public static ItemStack getTeaBag(Items teaItemName) {
 		TeaItem teaItem = ItemUtils.getTeaItem(teaItemName);
 		String teaBagName = teaItem.getTeaBagName();

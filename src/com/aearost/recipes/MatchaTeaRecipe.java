@@ -19,6 +19,13 @@ public class MatchaTeaRecipe {
 		createRecipe(plugin);
 	}
 	
+	/**
+	 * Creates the recipe for the Matcha Tea Bag.
+	 * 
+	 * Also allows for any type of leaves to be used as an ingredient.
+	 * 
+	 * @param plugin
+	 */
 	private void createRecipe(Plugin plugin) {
 		NamespacedKey nk = new NamespacedKey(plugin, "MATCHA_TEA");
 		

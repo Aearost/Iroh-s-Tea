@@ -16,7 +16,15 @@ public class TeaCrafting implements Listener {
 	public TeaCrafting(Main plugin) {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
-	
+
+	/**
+	 * Handles the crafting of a tea.
+	 * 
+	 * If the input ingredients are not a tea leaf nor a tea bag, the result will
+	 * not be crafted successfully and an error message will be displayed.
+	 * 
+	 * @param e
+	 */
 	@EventHandler
 	public void onCraftTea(final CraftItemEvent e) {
 		HumanEntity player = e.getWhoClicked();

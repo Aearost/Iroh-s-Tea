@@ -25,6 +25,9 @@ public class ItemUtils {
 		initializeItemsToItemStack();
 	}
 
+	/**
+	 * Instantiates all teas and their TeaItem values to the itemsToTea HashMap.
+	 */
 	private void initializeTeas() {
 		itemsToTea.put(Items.APPLE_CINNAMON_TEA.name(), new TeaItem("&cApple Cinnamon Tea", "&6&oJust a hint of tree bark",
 				new PotionEffect(PotionEffectType.FAST_DIGGING, 1800, 1), Color.fromRGB(255, 153, 102)));
@@ -44,6 +47,9 @@ public class ItemUtils {
 				new PotionEffect(PotionEffectType.SLOW, 1800, 2), Color.fromRGB(240, 255, 230)));
 	}
 	
+	/**
+	 * Initializes all items into ItemStacks to the itemsToItemStack HashMap.
+	 */
 	private void initializeItemsToItemStack() {
 		// Basic Items
 		itemsToItemStack.put(Items.TEA_LEAF.name(), TeaLeaf.getTeaLeaf());

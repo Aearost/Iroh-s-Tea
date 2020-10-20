@@ -13,6 +13,11 @@ import com.aearost.utils.ChatUtils;
 
 public class CactusJuice {
 
+	/**
+	 * Returns an ItemStack of Cactus Juice.
+	 * 
+	 * @return
+	 */
 	public static ItemStack getCactusJuice() {
 		ItemStack juice = new ItemStack(Material.POTION, 1);
 		PotionMeta meta = (PotionMeta) juice.getItemMeta();

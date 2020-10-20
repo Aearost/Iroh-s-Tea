@@ -23,10 +23,18 @@ import com.aearost.utils.ItemUtils;
 import com.aearost.utils.KettleUtils;
 
 public class CauldronBrewing implements Listener {
+
 	public CauldronBrewing(Main plugin) {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
 
+	/**
+	 * Handles the brewing of teas.
+	 * 
+	 * All logic is here.
+	 * 
+	 * @param e
+	 */
 	@EventHandler
 	public void onCauldronClick(final PlayerInteractEvent e) {
 		if (e.getHand() == EquipmentSlot.HAND && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
@@ -44,12 +52,15 @@ public class CauldronBrewing implements Listener {
 						// If nothing is in their hand and something is in the cauldron
 						if (is.getType() == Material.AIR) {
 							if (kettle.getHasBottle()) {
-								location.getWorld().dropItemNaturally(location, new ItemStack(Material.GLASS_BOTTLE, 1));
-								player.sendMessage(ChatUtils.chatMessage("&7You have retrieved the bottle by the kettle"));
-							} else if (kettle.getHasTeaBag()) {
 								location.getWorld().dropItemNaturally(location,
-										TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
-								player.sendMessage(ChatUtils.chatMessage("&7You have taken the tea bag out of the kettle"));
+										new ItemStack(Material.GLASS_BOTTLE, 1));
+								player.sendMessage(
+										ChatUtils.chatMessage("&7You have retrieved the bottle by the kettle"));
+							} else if (kettle.getHasTeaBag()) {
+								location.getWorld().dropItemNaturally(location, TeaBag
+										.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
+								player.sendMessage(
+										ChatUtils.chatMessage("&7You have taken the tea bag out of the kettle"));
 							}
 							KettleUtils.removeKettle(location);
 							player.playSound(location, Sound.ENTITY_ITEM_PICKUP, 1.0F, 1.0F);
@@ -58,7 +69,8 @@ public class CauldronBrewing implements Listener {
 
 						// If it's a tea bag
 						if (isTeaBag(is)) {
-							if (isFire(block.getWorld().getBlockAt(location.getBlockX(), location.getBlockY() - 1, location.getBlockZ()))) {
+							if (isFire(block.getWorld().getBlockAt(location.getBlockX(), location.getBlockY() - 1,
+									location.getBlockZ()))) {
 								if (!kettle.getHasTeaBag()) {
 									kettle.setHasTeaBag(true);
 									String teaName = ItemUtils.getTeaName(is);
@@ -66,7 +78,8 @@ public class CauldronBrewing implements Listener {
 									kettle.setTea(tea);
 									KettleUtils.addKettle(location, kettle);
 									is.setAmount(is.getAmount() - 1);
-									player.sendMessage(ChatUtils.chatMessage("&aYou have added a tea bag to the kettle!"));
+									player.sendMessage(
+											ChatUtils.chatMessage("&aYou have added a tea bag to the kettle!"));
 								} else {
 									player.sendMessage(
 											ChatUtils.chatMessage("&cYou have already added a tea bag to the kettle!"));
@@ -78,14 +91,17 @@ public class CauldronBrewing implements Listener {
 							}
 						} else if (is.getType() == Material.GLASS_BOTTLE) {
 							e.setCancelled(true);
-							if (isFire(block.getWorld().getBlockAt(location.getBlockX(), location.getBlockY() - 1, location.getBlockZ()))) {
+							if (isFire(block.getWorld().getBlockAt(location.getBlockX(), location.getBlockY() - 1,
+									location.getBlockZ()))) {
 								if (!kettle.getHasBottle()) {
 									kettle.setHasBottle(true);
 									KettleUtils.addKettle(location, kettle);
 									is.setAmount(is.getAmount() - 1);
-									player.sendMessage(ChatUtils.chatMessage("&aYou have placed a bottle next to the kettle!"));
+									player.sendMessage(
+											ChatUtils.chatMessage("&aYou have placed a bottle next to the kettle!"));
 								} else {
-									player.sendMessage(ChatUtils.chatMessage("&cYou have already placed a bottle there!"));
+									player.sendMessage(
+											ChatUtils.chatMessage("&cYou have already placed a bottle there!"));
 								}
 							} else {
 								player.sendMessage(ChatUtils.chatMessage("&cThere is no flame beneath the kettle!"));
@@ -99,7 +115,8 @@ public class CauldronBrewing implements Listener {
 						}
 					} else {
 						if (isTeaBag(is)) {
-							if (isFire(block.getWorld().getBlockAt(location.getBlockX(), location.getBlockY() - 1, location.getBlockZ()))) {
+							if (isFire(block.getWorld().getBlockAt(location.getBlockX(), location.getBlockY() - 1,
+									location.getBlockZ()))) {
 								kettle = new Kettle(false, true);
 								kettle.setHasTeaBag(true);
 								String teaName = ItemUtils.getTeaName(is);
@@ -116,11 +133,13 @@ public class CauldronBrewing implements Listener {
 							}
 						} else if (is.getType() == Material.GLASS_BOTTLE) {
 							e.setCancelled(true);
-							if (isFire(block.getWorld().getBlockAt(location.getBlockX(), location.getBlockY() - 1, location.getBlockZ()))) {
+							if (isFire(block.getWorld().getBlockAt(location.getBlockX(), location.getBlockY() - 1,
+									location.getBlockZ()))) {
 								kettle = new Kettle(true, false);
 								KettleUtils.addKettle(location, kettle);
 								is.setAmount(is.getAmount() - 1);
-								player.sendMessage(ChatUtils.chatMessage("&aYou have placed a bottle next to the kettle!"));
+								player.sendMessage(
+										ChatUtils.chatMessage("&aYou have placed a bottle next to the kettle!"));
 								player.playSound(location, Sound.ENTITY_ITEM_PICKUP, 1.0F, 0.5F);
 							} else {
 								player.sendMessage(ChatUtils.chatMessage("&cThere is no flame beneath the kettle!"));
@@ -153,10 +172,22 @@ public class CauldronBrewing implements Listener {
 		}
 	}
 
+	/**
+	 * Determines whether or not the input ItemStack is a valid tea bag item or not.
+	 * 
+	 * @param is
+	 * @return
+	 */
 	private boolean isTeaBag(ItemStack is) {
 		return is.getType() == Material.PAPER && is.getItemMeta().hasDisplayName() && is.getItemMeta().hasLore();
 	}
 
+	/**
+	 * Determines whether or not the input Block is a fire source or not.
+	 * 
+	 * @param b
+	 * @return
+	 */
 	private boolean isFire(Block b) {
 		Material m = b.getType();
 		return (m == Material.FIRE || m == Material.SOUL_FIRE || m == Material.CAMPFIRE || m == Material.SOUL_CAMPFIRE);

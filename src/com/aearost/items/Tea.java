@@ -11,6 +11,12 @@ import com.aearost.utils.ItemUtils;
 
 public class Tea {
 	
+	/**
+	 * Returns an ItemStack of the input tea, representing a tea.
+	 * 
+	 * @param teaItemName
+	 * @return
+	 */
 	public static ItemStack getTea(Items teaItemName) {
 		ItemStack tea = new ItemStack(Material.POTION, 1);
 		PotionMeta meta = (PotionMeta) tea.getItemMeta();
