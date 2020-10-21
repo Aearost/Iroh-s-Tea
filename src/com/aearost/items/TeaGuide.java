@@ -33,6 +33,8 @@ public class TeaGuide {
 		pages.add(ChatUtils.translateToColor(
 				"&l&nApple Cinnamon Tea\n\n&r&oJust a hint of tree bark\n\n&rIngredients:\n- 1 tea leaf\n- 1 apple\n- 1 wheat seeds\n- 1 dark oak log\n\nEffects:\n- Haste II (180s)"));
 		pages.add(ChatUtils.translateToColor(
+				"&l&nChamomile Tea\n\n&r&oGrandma, is that you?\n\n&rIngredients:\n- 1 tea leaf\n- 1 oxeye daisy\n- 1 wheat\n- 1 tall grass\n- 1 honey bottle\n\nEffects:\n- Instant Health V\n- Weak & Slow II (60s)"));
+		pages.add(ChatUtils.translateToColor(
 				"&l&nChocolate Tea\n\n&r&oSweet goodness!\n\n&rIngredients:\n- 1 tea leaf\n- 1 milk bucket\n- 1 cocoa beans\n- 1 sugar\n\nEffects:\n- Speed IV (120s)"));
 		pages.add(ChatUtils.translateToColor(
 				"&l&nJasmine Tea\n\n&r&oThe sweet taste of blossoms\n\n&rIngredients:\n- 1 tea leaf\n- 1 white tulip\n- 1 peony\n\nEffects:\n- Invisibility (15s)"));
@@ -41,9 +43,9 @@ public class TeaGuide {
 		pages.add(ChatUtils.translateToColor(
 				"&l&nT8 Tea\n\n&r&oEver hear of V8?\n\n&rIngredients:\n- 1 tea leaf\n- 2 carrots\n- 2 beetroots\n- 2 sweet berries\n- 1 melon slice\n\nEffects:\n- Regeneration II (60s)"));
 		pages.add(ChatUtils.translateToColor(
-				"&l&nWhite Dragon Tea\n\n&r&oDelicious tea?\n\nIngredients:\n- 1 tea leaf\n- 1 azure bluet\n- 1 white tulip\n\nEffects:\n- Instant Health III"));
+				"&l&nWhite Dragon Tea\n\n&r&oDelicious tea?\n\n&rIngredients:\n- 1 tea leaf\n- 1 azure bluet\n- 1 white tulip\n\nEffects:\n- Instant Health III"));
 		pages.add(ChatUtils.translateToColor(
-				"&l&nWhite Jade Tea\n\n&r&oDeadly poison?\n\nIngredients:\n- 1 tea leaf\n- 1 lily of the valley\n- 1 white tulip\n\nEffects:\n- Slowness III (180s)"));
+				"&l&nWhite Jade Tea\n\n&r&oDeadly poison?\n\n&rIngredients:\n- 1 tea leaf\n- 1 lily of the valley\n- 1 white tulip\n\nEffects:\n- Slowness III (180s)"));
 
 		pages.add(ChatUtils.translateToColor(
 				"&l&nCactus Juice\n\n&r&oDesperate times call for desperate measures...\n\n&rIngredients:\n - 4 cactus\n\nEffects:\n- Nausea V (120s)\n- Slowness III (180s)\n- Weakness V (180s)\n- Night Vision (10s)"));

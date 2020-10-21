@@ -69,7 +69,7 @@ public class TeaPlantHarvest implements Listener {
 
 					if (TeaPlantUtils.isPlant(location)) {
 						harvestTeaPlant(block, location);
-						e.getPlayer().playSound(location, Sound.BLOCK_GRASS_BREAK, 1.0F, 1.0F);
+						e.getPlayer().playSound(location, Sound.BLOCK_GRASS_BREAK, 1.0F, 0.8F);
 					}
 				}
 			}
