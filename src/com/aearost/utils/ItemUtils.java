@@ -58,7 +58,27 @@ public class ItemUtils {
 		chamomileEffects.add(new PotionEffect(PotionEffectType.WEAKNESS, 1200, 1));
 		itemsToTea.put(Items.CHAMOMILE_TEA.name(), new TeaItem("&eChamomile Tea", "&7Grandma, is that you?",
 				chamomileEffects, Color.fromRGB(213, 182, 83)));
-
+		List<PotionEffect> honeyRoseEffects = new ArrayList<>();
+		honeyRoseEffects.add(new PotionEffect(PotionEffectType.LEVITATION, 100, 2));
+		honeyRoseEffects.add(new PotionEffect(PotionEffectType.ABSORPTION, 160, 2));
+		itemsToTea.put(Items.HONEY_ROSE_TEA.name(), new TeaItem("&4Honey Rose Tea",
+				"&6Some say its taste is heavenly...", honeyRoseEffects, Color.fromRGB(150, 0, 24)));
+		List<PotionEffect> suspiciousEffects = new ArrayList<>();
+		suspiciousEffects.add(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 80, 0));
+		suspiciousEffects.add(new PotionEffect(PotionEffectType.BLINDNESS, 160, 0));
+		suspiciousEffects.add(new PotionEffect(PotionEffectType.SATURATION, 20, 6));
+		suspiciousEffects.add(new PotionEffect(PotionEffectType.JUMP, 120, 3));
+		suspiciousEffects.add(new PotionEffect(PotionEffectType.POISON, 240, 0));
+		suspiciousEffects.add(new PotionEffect(PotionEffectType.REGENERATION, 160, 0));
+		suspiciousEffects.add(new PotionEffect(PotionEffectType.NIGHT_VISION, 100, 0));
+		suspiciousEffects.add(new PotionEffect(PotionEffectType.WEAKNESS, 180, 1));
+		itemsToTea.put(Items.SUSPICIOUS_TEA.name(), new TeaItem("&8Suspicious Tea", "&7I wonder what this does...",
+				suspiciousEffects, Color.fromRGB(107, 68, 35)));
+		List<PotionEffect> tulipEffects = new ArrayList<>();
+		tulipEffects.add(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600, 1));
+		tulipEffects.add(new PotionEffect(PotionEffectType.ABSORPTION, 600, 2));
+		itemsToTea.put(Items.TULIP_TEA.name(),
+				new TeaItem("&dTulip Tea", "&cGot tulips?", tulipEffects, Color.fromRGB(255, 8, 0)));
 	}
 
 	/**
@@ -74,9 +94,12 @@ public class ItemUtils {
 		itemsToItemStack.put(Items.CHAMOMILE_TEA_BAG.name(), TeaBag.getTeaBag(Items.CHAMOMILE_TEA));
 		itemsToItemStack.put(Items.CHOCOLATE_TEA_BAG.name(), TeaBag.getTeaBag(Items.CHOCOLATE_TEA));
 		itemsToItemStack.put(Items.GREEN_TEA_BAG.name(), TeaBag.getTeaBag(Items.GREEN_TEA));
+		itemsToItemStack.put(Items.HONEY_ROSE_TEA_BAG.name(), TeaBag.getTeaBag(Items.HONEY_ROSE_TEA));
 		itemsToItemStack.put(Items.JASMINE_TEA_BAG.name(), TeaBag.getTeaBag(Items.JASMINE_TEA));
 		itemsToItemStack.put(Items.MATCHA_TEA_BAG.name(), TeaBag.getTeaBag(Items.MATCHA_TEA));
+		itemsToItemStack.put(Items.SUSPICIOUS_TEA_BAG.name(), TeaBag.getTeaBag(Items.SUSPICIOUS_TEA));
 		itemsToItemStack.put(Items.T8_TEA_BAG.name(), TeaBag.getTeaBag(Items.T8_TEA));
+		itemsToItemStack.put(Items.TULIP_TEA_BAG.name(), TeaBag.getTeaBag(Items.TULIP_TEA));
 		itemsToItemStack.put(Items.WHITE_DRAGON_TEA_BAG.name(), TeaBag.getTeaBag(Items.WHITE_DRAGON_TEA));
 		itemsToItemStack.put(Items.WHITE_JADE_TEA_BAG.name(), TeaBag.getTeaBag(Items.WHITE_JADE_TEA));
 
@@ -85,9 +108,12 @@ public class ItemUtils {
 		itemsToItemStack.put(Items.CHAMOMILE_TEA.name(), Tea.getTea(Items.CHAMOMILE_TEA));
 		itemsToItemStack.put(Items.CHOCOLATE_TEA.name(), Tea.getTea(Items.CHOCOLATE_TEA));
 		itemsToItemStack.put(Items.GREEN_TEA.name(), Tea.getTea(Items.GREEN_TEA));
+		itemsToItemStack.put(Items.HONEY_ROSE_TEA.name(), Tea.getTea(Items.HONEY_ROSE_TEA));
 		itemsToItemStack.put(Items.JASMINE_TEA.name(), Tea.getTea(Items.JASMINE_TEA));
 		itemsToItemStack.put(Items.MATCHA_TEA.name(), Tea.getTea(Items.MATCHA_TEA));
+		itemsToItemStack.put(Items.SUSPICIOUS_TEA.name(), Tea.getTea(Items.SUSPICIOUS_TEA));
 		itemsToItemStack.put(Items.T8_TEA.name(), Tea.getTea(Items.T8_TEA));
+		itemsToItemStack.put(Items.TULIP_TEA.name(), Tea.getTea(Items.TULIP_TEA));
 		itemsToItemStack.put(Items.WHITE_DRAGON_TEA.name(), Tea.getTea(Items.WHITE_DRAGON_TEA));
 		itemsToItemStack.put(Items.WHITE_JADE_TEA.name(), Tea.getTea(Items.WHITE_JADE_TEA));
 

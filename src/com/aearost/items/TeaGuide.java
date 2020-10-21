@@ -33,13 +33,19 @@ public class TeaGuide {
 		pages.add(ChatUtils.translateToColor(
 				"&l&nApple Cinnamon Tea\n\n&r&oJust a hint of tree bark\n\n&rIngredients:\n- 1 tea leaf\n- 1 apple\n- 1 wheat seeds\n- 1 dark oak log\n\nEffects:\n- Haste II (180s)"));
 		pages.add(ChatUtils.translateToColor(
-				"&l&nChamomile Tea\n\n&r&oGrandma, is that you?\n\n&rIngredients:\n- 1 tea leaf\n- 1 oxeye daisy\n- 1 wheat\n- 1 tall grass\n- 1 honey bottle\n\nEffects:\n- Instant Health V\n- Weak & Slow II (60s)"));
+				"&l&nChamomile Tea\n\n&r&oGrandma, is that you?\n\n&rIngredients:\n- 1 tea leaf\n- 1 oxeye daisy\n- 1 wheat\n- 1 tall grass\n- 1 honey bottle\nEffects:\n- Instant Health V\n- Weakness II (60s)\n- Slowness II (60s)"));
 		pages.add(ChatUtils.translateToColor(
 				"&l&nChocolate Tea\n\n&r&oSweet goodness!\n\n&rIngredients:\n- 1 tea leaf\n- 1 milk bucket\n- 1 cocoa beans\n- 1 sugar\n\nEffects:\n- Speed IV (120s)"));
+		pages.add(ChatUtils.translateToColor(
+				"&l&nHoney Rose Tea\n\n&r&oSome say its taste is heavenly...\n\n&rIngredients:\n- 1 tea leaf\n- 1 rose bush\n- 1 honey bottle\n- 1 poppy\n\nEffects:\n- Levitation III (5s)\n- Absorption III (8s)"));
 		pages.add(ChatUtils.translateToColor(
 				"&l&nJasmine Tea\n\n&r&oThe sweet taste of blossoms\n\n&rIngredients:\n- 1 tea leaf\n- 1 white tulip\n- 1 peony\n\nEffects:\n- Invisibility (15s)"));
 		pages.add(ChatUtils.translateToColor(
 				"&l&nMatcha Tea\n\n&r&oThe Japanese flavor you needed\n\n&rIngredients:\n- 1 tea leaf\n- 1 sugar\n- 1 leaves (any kind)\n\nEffects:\n- Jump III (120s)"));
+		pages.add(ChatUtils.translateToColor(
+				"&l&nSuspicious Tea\n\n&r&oI wonder what this does...\n&rIngredients:\n- 1 tea leaf\n- 1 allium\n- 1 blue orchid\n- 1 cornflower\n- 1 dandelion\n- 1 lily of the valley\n- 1 oxeye daisy\n- 1 poppy\n- 1 tulip (any color)"));
+		pages.add(ChatUtils.translateToColor(
+				"&l&nTulip Tea\n\n&r&oGot tulips?\n\n&rIngredients:\n- 1 tea leaf\n- 1 white tulip\n- 1 pink tulip\n- 1 orange tulip\n 1 red tulip\n\nEffects:\n- Strength II (30s)\n- Absorption III (30s)"));
 		pages.add(ChatUtils.translateToColor(
 				"&l&nT8 Tea\n\n&r&oEver hear of V8?\n\n&rIngredients:\n- 1 tea leaf\n- 2 carrots\n- 2 beetroots\n- 2 sweet berries\n- 1 melon slice\n\nEffects:\n- Regeneration II (60s)"));
 		pages.add(ChatUtils.translateToColor(
