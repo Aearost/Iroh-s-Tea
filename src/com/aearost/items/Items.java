@@ -3,6 +3,7 @@ package com.aearost.items;
 public enum Items {
 	// Basic Items
 	TEA_LEAF,
+	TEA_PLANT,
 	
 	// Tea Bags
 	GREEN_TEA_BAG,

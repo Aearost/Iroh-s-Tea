@@ -16,7 +16,7 @@ public class TeaPlant {
 	 * @return
 	 */
 	public static ItemStack getTeaPlant() {
-		ItemStack teaPlant = new ItemStack(Material.FERN, 1);
+		ItemStack teaPlant = new ItemStack(Material.OAK_SAPLING, 1);
 		ItemMeta meta = teaPlant.getItemMeta();
 		ArrayList<String> lore = new ArrayList<>();
 

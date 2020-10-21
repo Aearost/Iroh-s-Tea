@@ -194,11 +194,139 @@ public class FileUtils {
 	
 	
 	public static void readFromTeaPlantFile() {
-		
+		Bukkit.getLogger().info("In readFromTeaPlantFile");
+		String currentPath = System.getProperty("user.dir");
+		String filePath = currentPath + File.separator + "plugins" + File.separator + "IrohsTea" + File.separator
+				+ "tea_plants.json";
+		File file = new File(filePath);
+
+		// First run of plugin
+		if (!file.exists()) {
+			return;
+		}
+
+		Scanner reader;
+		try {
+			reader = new Scanner(file);
+			int fieldCount = 0;
+
+			World world = null;
+			int x = 0;
+			int y = 0;
+			int z = 0;
+			boolean isGrown = false;
+
+			while (reader.hasNextLine()) {
+				String line = reader.nextLine();
+				String fieldName = null;
+				String fieldValue = null;
+
+				if (line.endsWith("\",")) {
+					String[] parts = line.split("\"");
+					fieldName = parts[1];
+					fieldValue = parts[3];
+				} else {
+					continue;
+				}
+
+				if (fieldName.equals("worldName")) {
+					world = Bukkit.getWorld(fieldValue);
+				} else if (fieldName.equals("x")) {
+					x = Integer.parseInt(fieldValue);
+				} else if (fieldName.equals("y")) {
+					y = Integer.parseInt(fieldValue);
+				} else if (fieldName.equals("z")) {
+					z = Integer.parseInt(fieldValue);
+				} else if (fieldName.equals("isGrown")) {
+					isGrown = Boolean.parseBoolean(fieldValue);
+				} else {
+					reader.close();
+					throw new FileNotFoundException();
+				}
+
+				fieldCount++;
+
+				if (fieldCount == 7) {
+					Location location = new Location(world, x, y, z);
+					TeaPlantUtils.addPlant(location, isGrown);
+					fieldCount = 0;
+				}
+			}
+			reader.close();
+			file.delete();
+		} catch (FileNotFoundException e) {
+			Bukkit.getLogger().info("Something went wrong with reading the tea plants!");
+			e.printStackTrace();
+		}
 	}
 	
 	public static void writeToTeaPlantFile() {
-		
+		Bukkit.getLogger().info("In writeToTeaPlantFile");
+		HashMap<Location, Boolean> locationToPlant = TeaPlantUtils.getLocationToPlant();
+		if (locationToPlant.size() > 0) {
+
+			String currentPath = System.getProperty("user.dir");
+			String filePath = currentPath + File.separator + "plugins" + File.separator + "IrohsTea" + File.separator
+					+ "tea_plants.json";
+			File pluginDirectory = new File(currentPath + File.separator + "plugins" + File.separator + "IrohsTea");
+			File file = new File(filePath);
+
+			// If the directory exists
+			boolean isDirectoryCreated = true;
+			if (!pluginDirectory.isDirectory()) {
+				isDirectoryCreated = pluginDirectory.mkdir();
+			}
+			if (isDirectoryCreated) {
+				try {
+					// If the file isn't already there
+					if (file.createNewFile()) {
+						Bukkit.getLogger().info("A new tea_plants.json file has been generated");
+					} else {
+						throw new IOException();
+					}
+				} catch (IOException e) {
+					Bukkit.getLogger().info("An error occured in the creation of tea_plants.json");
+					e.printStackTrace();
+				}
+
+				try {
+					FileWriter writer = new FileWriter(filePath);
+					writer.write("{\n");
+					writer.write("\"plants\": {\n");
+					int counter = 1;
+
+					for (Map.Entry<Location, Boolean> entry : locationToPlant.entrySet()) {
+						Location location = entry.getKey();
+
+						int x = location.getBlockX();
+						int y = location.getBlockY();
+						int z = location.getBlockZ();
+						String worldName = location.getWorld().getName();
+						boolean isGrown = TeaPlantUtils.isPlantGrown(location);
+
+						writer.write("    \"" + counter + "\": {\n");
+						writer.write("        \"x\": \"" + x + "\",\n");
+						writer.write("        \"y\": \"" + y + "\",\n");
+						writer.write("        \"z\": \"" + z + "\",\n");
+						writer.write("        \"worldName\": \"" + worldName + "\",\n");
+						writer.write("        \"isGrown\": \"" + isGrown + "\",\n");
+
+						// If it's the last entry
+						if (locationToPlant.size() == counter) {
+							writer.write("    }\n");
+						} else {
+							writer.write("    },\n");
+						}
+						counter++;
+					}
+					writer.write("}\n");
+					writer.close();
+				} catch (IOException e) {
+					Bukkit.getLogger().info("There was an error in saving the tea plants");
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 }

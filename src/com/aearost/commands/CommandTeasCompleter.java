@@ -55,10 +55,13 @@ public class CommandTeasCompleter implements TabCompleter {
 					displayedOptions.add("64");
 				}
 			}
-
-		} else if ("kettles".startsWith(args[0]) && args[0].length() > 0) {
+		} else if (("plants".startsWith(args[0]) || "kettles".startsWith(args[0])) && args[0].length() > 0) {
 			if (args.length == 1) {
-				displayedOptions.add("kettles");
+				if ("plants".startsWith(args[0])) {
+					displayedOptions.add("plants");
+				} else {
+					displayedOptions.add("kettles");
+				}
 			} else if (args.length == 2) {
 				if ("display".startsWith(args[1]) && args[1].length() > 0) {
 					displayedOptions.add("display");
@@ -83,6 +86,7 @@ public class CommandTeasCompleter implements TabCompleter {
 			displayedOptions.add("book");
 			displayedOptions.add("give");
 			displayedOptions.add("kettles");
+			displayedOptions.add("plants");
 		}
 
 		return displayedOptions;

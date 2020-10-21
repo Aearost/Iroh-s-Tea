@@ -14,6 +14,7 @@ import com.aearost.items.Tea;
 import com.aearost.items.TeaBag;
 import com.aearost.items.TeaItem;
 import com.aearost.items.TeaLeaf;
+import com.aearost.items.TeaPlant;
 
 public class ItemUtils {
 
@@ -53,6 +54,7 @@ public class ItemUtils {
 	private void initializeItemsToItemStack() {
 		// Basic Items
 		itemsToItemStack.put(Items.TEA_LEAF.name(), TeaLeaf.getTeaLeaf());
+		itemsToItemStack.put(Items.TEA_PLANT.name(), TeaPlant.getTeaPlant());
 		
 		// Tea Bags
 		itemsToItemStack.put(Items.APPLE_CINNAMON_TEA_BAG.name(), TeaBag.getTeaBag(Items.APPLE_CINNAMON_TEA));

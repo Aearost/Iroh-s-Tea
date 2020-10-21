@@ -8,6 +8,7 @@ import com.aearost.commands.CommandTeasCompleter;
 import com.aearost.events.CauldronBrewing;
 import com.aearost.events.CauldronDestroy;
 import com.aearost.events.TeaCrafting;
+import com.aearost.events.TeaPlantDecay;
 import com.aearost.events.TeaPlantDrop;
 import com.aearost.events.TeaPlantGrow;
 import com.aearost.events.TeaPlantHarvest;
@@ -40,10 +41,10 @@ public class Main extends JavaPlugin {
 		new TeaPlantPlace(this);
 		new TeaPlantGrow(this);
 		new TeaPlantHarvest(this);
+		new TeaPlantDecay(this);
 		new TeaCrafting(this);
 		new CauldronBrewing(this);
 		new CauldronDestroy(this);
-		
 		
 		// Crafting Recipes
 		new AppleCinnamonTeaRecipe(this);
@@ -65,6 +66,7 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		new KettleUtils(false);
+		new TeaPlantUtils(false);
 	}
 	
 }
