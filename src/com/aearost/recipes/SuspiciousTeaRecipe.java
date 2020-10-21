@@ -23,6 +23,8 @@ public class SuspiciousTeaRecipe {
 	/**
 	 * Creates the recipe for the Suspicious Tea Bag.
 	 * 
+	 * Also allows for any type of tulip to be used as an ingredient.
+	 * 
 	 * @param plugin
 	 */
 	private void createRecipe(Plugin plugin) {
