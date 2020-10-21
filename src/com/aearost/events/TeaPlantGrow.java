@@ -16,6 +16,11 @@ public class TeaPlantGrow implements Listener {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
 
+	/**
+	 * Prevents a tree from growing and instead grows the tea plant.
+	 * 
+	 * @param e
+	 */
 	@EventHandler
 	public void onTeaPlantGrow(final StructureGrowEvent e) {
 		Location location = e.getLocation();

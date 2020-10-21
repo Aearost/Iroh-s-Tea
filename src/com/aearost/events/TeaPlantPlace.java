@@ -17,6 +17,11 @@ public class TeaPlantPlace implements Listener {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
 
+	/**
+	 * Handles the placing of a tea plant.
+	 * 
+	 * @param e
+	 */
 	@EventHandler
 	public void onTeaPlantPlace(final BlockPlaceEvent e) {
 		Block block = e.getBlock();

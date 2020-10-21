@@ -21,9 +21,9 @@ public class CommandTeasCompleter implements TabCompleter {
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		List<String> displayedOptions = new ArrayList<>();
 
-		if ("book".startsWith(args[0]) && args[0].length() > 0) {
+		if ("guide".startsWith(args[0]) && args[0].length() > 0) {
 			if (args.length == 1) {
-				displayedOptions.add("book");
+				displayedOptions.add("guide");
 			}
 		} else if ("give".startsWith(args[0]) && args[0].length() > 0) {
 			if (args.length == 1) {
@@ -83,8 +83,8 @@ public class CommandTeasCompleter implements TabCompleter {
 				displayedOptions.add("0");
 			}
 		} else if (args.length == 1) {
-			displayedOptions.add("book");
 			displayedOptions.add("give");
+			displayedOptions.add("guide");
 			displayedOptions.add("kettles");
 			displayedOptions.add("plants");
 		}

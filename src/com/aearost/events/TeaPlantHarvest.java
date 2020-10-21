@@ -3,6 +3,7 @@ package com.aearost.events;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -25,23 +26,41 @@ public class TeaPlantHarvest implements Listener {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
 
+	/**
+	 * Handles the harvesting of tea plants by destroying them.
+	 * 
+	 * Additionally will drop the tea plant's drops if the block beneath it is destroyed.
+	 * 
+	 * @param e
+	 */
 	@EventHandler
 	public void onTeaPlantHarvest(final BlockBreakEvent e) {
 		Block block = e.getBlock();
 		Location location = block.getLocation();
+		Location locationAbove = new Location(location.getWorld(), location.getBlockX(), location.getBlockY() + 1,
+				location.getBlockZ());
 
 		if (TeaPlantUtils.isPlant(location)) {
-			e.setCancelled(true);
-			harvestTeaPlant(block, location);
+			if (e.getPlayer().getGameMode() == GameMode.SURVIVAL) {
+				e.setCancelled(true);
+				harvestTeaPlant(block, location);
+			}
+		} else if (TeaPlantUtils.isPlant(locationAbove)) {
+			harvestTeaPlant(locationAbove.getBlock(), locationAbove);
+			block.setType(Material.AIR);
+			TeaPlantUtils.removePlant(location);
 		}
 	}
 
+	/**
+	 * Handles the harvesting of tea plants by right-clicking them.
+	 * 
+	 * @param e
+	 */
 	@EventHandler
 	public void onTeaPlantInteract(final PlayerInteractEvent e) {
-
 		if (e.getHand() == EquipmentSlot.HAND && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			Block block = e.getClickedBlock();
-
 			if (block != null) {
 				// Only harvest if it's leaves
 				if (block.getType() == Material.JUNGLE_LEAVES) {
@@ -53,7 +72,6 @@ public class TeaPlantHarvest implements Listener {
 				}
 			}
 		}
-
 	}
 
 	/**

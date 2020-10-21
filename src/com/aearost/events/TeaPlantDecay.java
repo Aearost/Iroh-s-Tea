@@ -15,6 +15,11 @@ public class TeaPlantDecay implements Listener {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
 
+	/**
+	 * Prevents tea plants from decaying.
+	 * 
+	 * @param e
+	 */
 	@EventHandler
 	public void onTeaPlantDecay(final LeavesDecayEvent e) {
 		Location location = e.getBlock().getLocation();

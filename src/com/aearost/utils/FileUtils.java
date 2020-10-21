@@ -190,11 +190,14 @@ public class FileUtils {
 		}
 	}
 
-	
-	
-	
+	/**
+	 * Initializes the locationToPlant HashMap based on the tea_plants.json file.
+	 * 
+	 * After all tea plants have been iterated, the file is deleted.
+	 * 
+	 * @param plugin
+	 */
 	public static void readFromTeaPlantFile() {
-		Bukkit.getLogger().info("In readFromTeaPlantFile");
 		String currentPath = System.getProperty("user.dir");
 		String filePath = currentPath + File.separator + "plugins" + File.separator + "IrohsTea" + File.separator
 				+ "tea_plants.json";
@@ -246,7 +249,7 @@ public class FileUtils {
 
 				fieldCount++;
 
-				if (fieldCount == 7) {
+				if (fieldCount == 5) {
 					Location location = new Location(world, x, y, z);
 					TeaPlantUtils.addPlant(location, isGrown);
 					fieldCount = 0;
@@ -259,9 +262,14 @@ public class FileUtils {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Writes to the tea_plants.json file based on the contents of the
+	 * locationToPlant HashMap.
+	 * 
+	 * @param plugin
+	 */
 	public static void writeToTeaPlantFile() {
-		Bukkit.getLogger().info("In writeToTeaPlantFile");
 		HashMap<Location, Boolean> locationToPlant = TeaPlantUtils.getLocationToPlant();
 		if (locationToPlant.size() > 0) {
 
@@ -328,5 +336,5 @@ public class FileUtils {
 			}
 		}
 	}
-	
+
 }

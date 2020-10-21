@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.BookMeta;
 
 import com.aearost.utils.ChatUtils;
 
-public class RecipeBook {
+public class TeaGuide {
 
 	/**
 	 * Creates and returns an ItemStack, representing the recipe book given to a
@@ -16,7 +16,7 @@ public class RecipeBook {
 	 * 
 	 * @return
 	 */
-	public static ItemStack getRecipeBook() {
+	public static ItemStack getGuide() {
 		ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
 		BookMeta meta = (BookMeta) book.getItemMeta();
 		meta.setTitle(ChatUtils.translateToColor("&2A Guide to Happiness"));

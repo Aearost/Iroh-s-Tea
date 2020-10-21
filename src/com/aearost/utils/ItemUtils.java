@@ -30,12 +30,12 @@ public class ItemUtils {
 	 * Instantiates all teas and their TeaItem values to the itemsToTea HashMap.
 	 */
 	private void initializeTeas() {
+		itemsToTea.put(Items.GREEN_TEA.name(), new TeaItem("&2Green Tea", "&a&oSimple, yet delicious",
+				new PotionEffect(PotionEffectType.LUCK, 600, 2), Color.fromRGB(90, 220, 90)));
 		itemsToTea.put(Items.APPLE_CINNAMON_TEA.name(), new TeaItem("&cApple Cinnamon Tea", "&6&oJust a hint of tree bark",
 				new PotionEffect(PotionEffectType.FAST_DIGGING, 1800, 1), Color.fromRGB(255, 153, 102)));
 		itemsToTea.put(Items.CHOCOLATE_TEA.name(), new TeaItem("&6Chocolate Tea", "&7&oSweet goodness!",
 				new PotionEffect(PotionEffectType.SPEED, 1200, 3), Color.fromRGB(123, 63, 0)));
-		itemsToTea.put(Items.GREEN_TEA.name(), new TeaItem("&2Green Tea", "&a&oSimple, yet delicious",
-				new PotionEffect(PotionEffectType.LUCK, 600, 2), Color.fromRGB(90, 220, 90)));
 		itemsToTea.put(Items.JASMINE_TEA.name(), new TeaItem("&eJasmine Tea", "&7&oThe sweet taste of blossoms",
 				new PotionEffect(PotionEffectType.INVISIBILITY, 300, 0), Color.fromRGB(220, 255, 115)));
 		itemsToTea.put(Items.MATCHA_TEA.name(), new TeaItem("&aMatcha Tea", "&7&oThe Japanese flavor you needed",

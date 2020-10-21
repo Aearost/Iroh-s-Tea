@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import com.aearost.events.TeaPlantHarvest;
 import com.aearost.items.Items;
 import com.aearost.items.Kettle;
-import com.aearost.items.RecipeBook;
+import com.aearost.items.TeaGuide;
 import com.aearost.items.TeaBag;
 import com.aearost.items.TeaPlant;
 import com.aearost.utils.ChatUtils;
@@ -34,17 +34,17 @@ public class CommandTeas implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
 			sender.sendMessage(ChatUtils.translateToColor("&a         - - &2&lIroh's Teas &a- -"));
-			sender.sendMessage(ChatUtils.translateToColor("&6/teas &ebook"));
 			sender.sendMessage(ChatUtils.translateToColor("&6/teas &egive <player> <item> &7[amount]"));
+			sender.sendMessage(ChatUtils.translateToColor("&6/teas &eguide"));
 			sender.sendMessage(ChatUtils.translateToColor("&6/teas &ekettles <display | remove | removeall>"));
 			sender.sendMessage(ChatUtils.translateToColor("&6/teas &eplants <display | remove | removeall>"));
 			return true;
 		}
 
-		if (args[0].equals("book")) {
+		if (args[0].equals("guide")) {
 			if (sender instanceof Player) {
-				((Player) sender).getInventory().addItem(RecipeBook.getRecipeBook());
-				sender.sendMessage(ChatUtils.chatMessage("&aA recipe book has been added to your inventory!"));
+				((Player) sender).getInventory().addItem(TeaGuide.getGuide());
+				sender.sendMessage(ChatUtils.chatMessage("&aA tea guide has been added to your inventory!"));
 				return true;
 			} else {
 				sender.sendMessage(ChatUtils.chatMessage("&cYou must be a player to use this command!"));
@@ -300,8 +300,8 @@ public class CommandTeas implements CommandExecutor {
 			return false;
 		}
 		sender.sendMessage(ChatUtils.translateToColor("&a         - - &2&lIroh's Teas &a- -"));
-		sender.sendMessage(ChatUtils.translateToColor("&6/teas &ebook"));
 		sender.sendMessage(ChatUtils.translateToColor("&6/teas &egive <player> <item> &7[amount]"));
+		sender.sendMessage(ChatUtils.translateToColor("&6/teas &eguide"));
 		sender.sendMessage(ChatUtils.translateToColor("&6/teas &ekettles <display | remove | removeall>"));
 		sender.sendMessage(ChatUtils.translateToColor("&6/teas &eplants <display | remove | removeall>"));
 		return false;
