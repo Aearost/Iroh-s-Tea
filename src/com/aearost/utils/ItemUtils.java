@@ -1,6 +1,8 @@
 package com.aearost.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Color;
 import org.bukkit.entity.Player;
@@ -20,7 +22,7 @@ public class ItemUtils {
 
 	private final static HashMap<String, ItemStack> itemsToItemStack = new HashMap<String, ItemStack>();
 	public final static HashMap<String, TeaItem> itemsToTea = new HashMap<String, TeaItem>();
-	
+
 	public ItemUtils() {
 		initializeTeas();
 		initializeItemsToItemStack();
@@ -30,10 +32,12 @@ public class ItemUtils {
 	 * Instantiates all teas and their TeaItem values to the itemsToTea HashMap.
 	 */
 	private void initializeTeas() {
+		// Teas with a single effect
 		itemsToTea.put(Items.GREEN_TEA.name(), new TeaItem("&2Green Tea", "&a&oSimple, yet delicious",
 				new PotionEffect(PotionEffectType.LUCK, 600, 2), Color.fromRGB(90, 220, 90)));
-		itemsToTea.put(Items.APPLE_CINNAMON_TEA.name(), new TeaItem("&cApple Cinnamon Tea", "&6&oJust a hint of tree bark",
-				new PotionEffect(PotionEffectType.FAST_DIGGING, 1800, 1), Color.fromRGB(255, 153, 102)));
+		itemsToTea.put(Items.APPLE_CINNAMON_TEA.name(),
+				new TeaItem("&cApple Cinnamon Tea", "&6&oJust a hint of tree bark",
+						new PotionEffect(PotionEffectType.FAST_DIGGING, 1800, 1), Color.fromRGB(255, 153, 102)));
 		itemsToTea.put(Items.CHOCOLATE_TEA.name(), new TeaItem("&6Chocolate Tea", "&7&oSweet goodness!",
 				new PotionEffect(PotionEffectType.SPEED, 1200, 3), Color.fromRGB(123, 63, 0)));
 		itemsToTea.put(Items.JASMINE_TEA.name(), new TeaItem("&eJasmine Tea", "&7&oThe sweet taste of blossoms",
@@ -46,8 +50,17 @@ public class ItemUtils {
 				new PotionEffect(PotionEffectType.HEAL, -1, 2), Color.fromRGB(230, 255, 240)));
 		itemsToTea.put(Items.WHITE_JADE_TEA.name(), new TeaItem("&fWhite Jade Tea", "&7&oDeadly poison?",
 				new PotionEffect(PotionEffectType.SLOW, 1800, 2), Color.fromRGB(240, 255, 230)));
+
+		// Teas with multiple effects
+		List<PotionEffect> chamomileEffects = new ArrayList<>();
+		chamomileEffects.add(new PotionEffect(PotionEffectType.HEAL, -1, 4));
+		chamomileEffects.add(new PotionEffect(PotionEffectType.SLOW, 1200, 1));
+		chamomileEffects.add(new PotionEffect(PotionEffectType.WEAKNESS, 1200, 1));
+		itemsToTea.put(Items.CHAMOMILE_TEA.name(), new TeaItem("&eChamomile Tea", "&7Grandma, is that you?",
+				chamomileEffects, Color.fromRGB(213, 182, 83)));
+
 	}
-	
+
 	/**
 	 * Initializes all items into ItemStacks to the itemsToItemStack HashMap.
 	 */
@@ -55,9 +68,10 @@ public class ItemUtils {
 		// Basic Items
 		itemsToItemStack.put(Items.TEA_LEAF.name(), TeaLeaf.getTeaLeaf());
 		itemsToItemStack.put(Items.TEA_PLANT.name(), TeaPlant.getTeaPlant());
-		
+
 		// Tea Bags
 		itemsToItemStack.put(Items.APPLE_CINNAMON_TEA_BAG.name(), TeaBag.getTeaBag(Items.APPLE_CINNAMON_TEA));
+		itemsToItemStack.put(Items.CHAMOMILE_TEA_BAG.name(), TeaBag.getTeaBag(Items.CHAMOMILE_TEA));
 		itemsToItemStack.put(Items.CHOCOLATE_TEA_BAG.name(), TeaBag.getTeaBag(Items.CHOCOLATE_TEA));
 		itemsToItemStack.put(Items.GREEN_TEA_BAG.name(), TeaBag.getTeaBag(Items.GREEN_TEA));
 		itemsToItemStack.put(Items.JASMINE_TEA_BAG.name(), TeaBag.getTeaBag(Items.JASMINE_TEA));
@@ -65,9 +79,10 @@ public class ItemUtils {
 		itemsToItemStack.put(Items.T8_TEA_BAG.name(), TeaBag.getTeaBag(Items.T8_TEA));
 		itemsToItemStack.put(Items.WHITE_DRAGON_TEA_BAG.name(), TeaBag.getTeaBag(Items.WHITE_DRAGON_TEA));
 		itemsToItemStack.put(Items.WHITE_JADE_TEA_BAG.name(), TeaBag.getTeaBag(Items.WHITE_JADE_TEA));
-		
+
 		// Teas
 		itemsToItemStack.put(Items.APPLE_CINNAMON_TEA.name(), Tea.getTea(Items.APPLE_CINNAMON_TEA));
+		itemsToItemStack.put(Items.CHAMOMILE_TEA.name(), Tea.getTea(Items.CHAMOMILE_TEA));
 		itemsToItemStack.put(Items.CHOCOLATE_TEA.name(), Tea.getTea(Items.CHOCOLATE_TEA));
 		itemsToItemStack.put(Items.GREEN_TEA.name(), Tea.getTea(Items.GREEN_TEA));
 		itemsToItemStack.put(Items.JASMINE_TEA.name(), Tea.getTea(Items.JASMINE_TEA));
@@ -75,20 +90,20 @@ public class ItemUtils {
 		itemsToItemStack.put(Items.T8_TEA.name(), Tea.getTea(Items.T8_TEA));
 		itemsToItemStack.put(Items.WHITE_DRAGON_TEA.name(), Tea.getTea(Items.WHITE_DRAGON_TEA));
 		itemsToItemStack.put(Items.WHITE_JADE_TEA.name(), Tea.getTea(Items.WHITE_JADE_TEA));
-		
+
 		// Other Drinks
 		itemsToItemStack.put(Items.CACTUS_JUICE.name(), CactusJuice.getCactusJuice());
-	}	
-	
+	}
+
 	public static TeaItem getTeaItem(Items tea) {
 		return itemsToTea.get(tea.name());
 	}
-	
+
 	public static ItemStack getItem(String itemName) {
-		Items i = Items.valueOf(itemName);
+		Items i = Items.valueOf(itemName.toUpperCase());
 		return itemsToItemStack.get(i.name());
 	}
-	
+
 	public static String getTeaName(ItemStack is) {
 		String teaName = is.getItemMeta().getDisplayName();
 		teaName = teaName.substring(2, teaName.length() - 4);
@@ -96,7 +111,7 @@ public class ItemUtils {
 		teaName = teaName.replace(" ", "_");
 		return teaName;
 	}
-	
+
 	/**
 	 * Adds the ItemStack to the player's inventory.
 	 * 
@@ -159,5 +174,5 @@ public class ItemUtils {
 		}
 		return 0;
 	}
-	
+
 }

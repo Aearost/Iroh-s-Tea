@@ -23,10 +23,16 @@ public class CommandTeasCompleter implements TabCompleter {
 
 		if ("guide".startsWith(args[0]) && args[0].length() > 0) {
 			if (args.length == 1) {
+				if (args[0].equals("g")) {
+					displayedOptions.add("give");
+				}
 				displayedOptions.add("guide");
 			}
 		} else if ("give".startsWith(args[0]) && args[0].length() > 0) {
 			if (args.length == 1) {
+				if (args[0].equals("g")) {
+					displayedOptions.add("guide");
+				}
 				displayedOptions.add("give");
 			}
 			// List online players

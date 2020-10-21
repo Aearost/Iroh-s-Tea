@@ -102,7 +102,8 @@ public class CommandTeas implements CommandExecutor {
 			}
 			if (args.length == 2) {
 				@SuppressWarnings("unchecked")
-				Map<Location, Kettle> locationToKettle = (Map<Location, Kettle>) KettleUtils.getLocationToKettle().clone();
+				Map<Location, Kettle> locationToKettle = (Map<Location, Kettle>) KettleUtils.getLocationToKettle()
+						.clone();
 				if (args[1].equals("display")) {
 					sender.sendMessage(ChatUtils.translateToColor("&e         - - &6&lActive Kettles &e- -"));
 					if (locationToKettle.size() == 0) {
@@ -132,10 +133,11 @@ public class CommandTeas implements CommandExecutor {
 						if (location.getChunk().isLoaded()) {
 							Kettle kettle = KettleUtils.getKettle(location);
 							if (kettle.getHasBottle()) {
-								location.getWorld().dropItemNaturally(location, new ItemStack(Material.GLASS_BOTTLE, 1));
-							} else if (kettle.getHasTeaBag()) {
 								location.getWorld().dropItemNaturally(location,
-										TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
+										new ItemStack(Material.GLASS_BOTTLE, 1));
+							} else if (kettle.getHasTeaBag()) {
+								location.getWorld().dropItemNaturally(location, TeaBag
+										.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
 							}
 						}
 						KettleUtils.removeKettle(location);
@@ -178,10 +180,11 @@ public class CommandTeas implements CommandExecutor {
 								"&7The kettle at &fx: " + x + " | y: " + y + " | z: " + z + " &7has been deleted"));
 						if (location.getChunk().isLoaded()) {
 							if (kettle.getHasBottle()) {
-								location.getWorld().dropItemNaturally(location, new ItemStack(Material.GLASS_BOTTLE, 1));
-							} else if (kettle.getHasTeaBag()) {
 								location.getWorld().dropItemNaturally(location,
-										TeaBag.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
+										new ItemStack(Material.GLASS_BOTTLE, 1));
+							} else if (kettle.getHasTeaBag()) {
+								location.getWorld().dropItemNaturally(location, TeaBag
+										.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
 							}
 						}
 						KettleUtils.removeKettle(location);
@@ -204,7 +207,8 @@ public class CommandTeas implements CommandExecutor {
 			}
 			if (args.length == 2) {
 				@SuppressWarnings("unchecked")
-				Map<Location, Boolean> locationToPlant = (Map<Location, Boolean>) TeaPlantUtils.getLocationToPlant().clone();
+				Map<Location, Boolean> locationToPlant = (Map<Location, Boolean>) TeaPlantUtils.getLocationToPlant()
+						.clone();
 				if (args[1].equals("display")) {
 					sender.sendMessage(ChatUtils.translateToColor("&a         - - &2&lTea Plants &a- -"));
 					if (locationToPlant.size() == 0) {
@@ -219,7 +223,7 @@ public class CommandTeas implements CommandExecutor {
 									+ " | y: " + l.getBlockY() + " | z: " + l.getBlockZ() + " &6(Matured)"));
 						} else {
 							sender.sendMessage(ChatUtils.translateToColor("&7" + i + ". &ex: " + l.getBlockX()
-							+ " | y: " + l.getBlockY() + " | z: " + l.getBlockZ()));
+									+ " | y: " + l.getBlockY() + " | z: " + l.getBlockZ()));
 						}
 						i++;
 					}

@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -68,6 +69,7 @@ public class TeaPlantHarvest implements Listener {
 
 					if (TeaPlantUtils.isPlant(location)) {
 						harvestTeaPlant(block, location);
+						e.getPlayer().playSound(location, Sound.BLOCK_GRASS_BREAK, 1.0F, 1.0F);
 					}
 				}
 			}

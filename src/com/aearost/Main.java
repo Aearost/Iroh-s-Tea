@@ -1,6 +1,5 @@
 package com.aearost;
 
-
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.aearost.commands.CommandTeas;
@@ -15,6 +14,7 @@ import com.aearost.events.TeaPlantHarvest;
 import com.aearost.events.TeaPlantPlace;
 import com.aearost.recipes.AppleCinnamonTeaRecipe;
 import com.aearost.recipes.CactusJuiceRecipe;
+import com.aearost.recipes.ChamomileTeaRecipe;
 import com.aearost.recipes.ChocolateTeaRecipe;
 import com.aearost.recipes.GreenTeaRecipe;
 import com.aearost.recipes.JasmineTeaRecipe;
@@ -27,16 +27,16 @@ import com.aearost.utils.KettleUtils;
 import com.aearost.utils.TeaPlantUtils;
 
 public class Main extends JavaPlugin {
-	
+
 	@Override
 	public void onEnable() {
-		
+
 		// Initialize Utils
 		new ItemUtils();
 		new KettleUtils(true);
 		new TeaPlantUtils(true);
-		
-		// Initialize events	
+
+		// Initialize events
 		new TeaPlantDrop(this);
 		new TeaPlantPlace(this);
 		new TeaPlantGrow(this);
@@ -45,9 +45,10 @@ public class Main extends JavaPlugin {
 		new TeaCrafting(this);
 		new CauldronBrewing(this);
 		new CauldronDestroy(this);
-		
+
 		// Crafting Recipes
 		new AppleCinnamonTeaRecipe(this);
+		new ChamomileTeaRecipe(this);
 		new ChocolateTeaRecipe(this);
 		new GreenTeaRecipe(this);
 		new JasmineTeaRecipe(this);
@@ -55,18 +56,18 @@ public class Main extends JavaPlugin {
 		new T8TeaRecipe(this);
 		new WhiteDragonTeaRecipe(this);
 		new WhiteJadeTeaRecipe(this);
-		
+
 		new CactusJuiceRecipe(this);
-		
+
 		// Initialize commands
 		getCommand("teas").setExecutor(new CommandTeas());
 		getCommand("teas").setTabCompleter(new CommandTeasCompleter());
 	}
-	
+
 	@Override
 	public void onDisable() {
 		new KettleUtils(false);
 		new TeaPlantUtils(false);
 	}
-	
+
 }
