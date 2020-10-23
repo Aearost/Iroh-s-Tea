@@ -32,9 +32,9 @@ public class TeaPlantDrop implements Listener {
 		Location location = block.getLocation();
 		
 		boolean teaPlantWillDrop = false;
-		if (block.getType() == Material.GRASS) {
+		if (block.getType() == Material.GRASS || block.getType() == Material.FERN) {
 			teaPlantWillDrop = determineIfDropTeaPlant(1);
-		} else if (block.getType() == Material.TALL_GRASS) {
+		} else if (block.getType() == Material.TALL_GRASS || block.getType() == Material.LARGE_FERN) {
 			teaPlantWillDrop = determineIfDropTeaPlant(Utils.DROP_RATE_MODIFIER);
 		}
 		

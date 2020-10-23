@@ -26,7 +26,7 @@ public class JasmineTeaRecipe {
 		ItemStack teaBag = TeaBag.getTeaBag(Items.JASMINE_TEA);
 		ShapelessRecipe recipe = new ShapelessRecipe(nk, teaBag);
 		
-		recipe.addIngredient(1, Material.KELP);
+		recipe.addIngredient(1, Material.PAPER);
 		recipe.addIngredient(1, Material.WHITE_TULIP);
 		recipe.addIngredient(1, Material.PEONY);
 		

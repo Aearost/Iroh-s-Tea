@@ -41,7 +41,7 @@ public class CommandTeas implements CommandExecutor {
 			return true;
 		}
 
-		if (args[0].equals("guide")) {
+		if (args[0].toLowerCase().equals("guide")) {
 			if (sender instanceof Player) {
 				((Player) sender).getInventory().addItem(TeaGuide.getGuide());
 				sender.sendMessage(ChatUtils.chatMessage("&aA tea guide has been added to your inventory!"));
@@ -49,7 +49,7 @@ public class CommandTeas implements CommandExecutor {
 			} else {
 				sender.sendMessage(ChatUtils.chatMessage("&cYou must be a player to use this command!"));
 			}
-		} else if (args[0].equals("give")) {
+		} else if (args[0].toLowerCase().equals("give")) {
 			if (!sender.hasPermission("irohsteas.admin.give")) {
 				sender.sendMessage(ChatUtils.chatMessage("&cYou do not have permission to use this command!"));
 				return false;
@@ -67,7 +67,7 @@ public class CommandTeas implements CommandExecutor {
 				}
 
 				Player target = Bukkit.getPlayer(args[1]);
-				if (args.length == 4) {
+				if (args.length >= 4) {
 					int amount;
 					try {
 						amount = Integer.parseInt(args[3]);
@@ -89,25 +89,26 @@ public class CommandTeas implements CommandExecutor {
 					is.setAmount(64);
 					return giveItem(is, target, sender);
 				}
-			} else if (!Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1]))) {
-				sender.sendMessage(ChatUtils.translateToColor("&7" + args[1] + " &ccould not be found!"));
+			} else if (args.length > 1 && !Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1]))) {
+				sender.sendMessage(ChatUtils.chatMessage("&7" + args[1] + " &ccould not be found!"));
 				return false;
 			}
 			sender.sendMessage(ChatUtils.translateToColor("&aProper Usage: &6/teas &egive <player> <item> &7[amount]"));
 			return false;
-		} else if (args[0].equals("kettles")) {
+
+		} else if (args[0].toLowerCase().equals("kettles")) {
 			if (!sender.hasPermission("irohsteas.admin.kettles")) {
 				sender.sendMessage(ChatUtils.chatMessage("&cYou do not have permission to use this command!"));
 				return false;
 			}
-			if (args.length == 2) {
+			if (args.length >= 2) {
 				@SuppressWarnings("unchecked")
 				Map<Location, Kettle> locationToKettle = (Map<Location, Kettle>) KettleUtils.getLocationToKettle()
 						.clone();
-				if (args[1].equals("display")) {
+				if (args[1].toLowerCase().equals("display")) {
 					sender.sendMessage(ChatUtils.translateToColor("&e         - - &6&lActive Kettles &e- -"));
 					if (locationToKettle.size() == 0) {
-						sender.sendMessage(ChatUtils.chatMessage("&7There are currently no active kettles"));
+						sender.sendMessage(ChatUtils.translateToColor("&7There are currently no active kettles"));
 						return true;
 					}
 					int i = 1;
@@ -123,7 +124,7 @@ public class CommandTeas implements CommandExecutor {
 						i++;
 					}
 					return true;
-				} else if (args[1].equals("removeall")) {
+				} else if (args[1].toLowerCase().equals("removeall")) {
 					if (locationToKettle.size() == 0) {
 						sender.sendMessage(ChatUtils.chatMessage("&7There are currently no active kettles"));
 						return false;
@@ -144,55 +145,55 @@ public class CommandTeas implements CommandExecutor {
 					}
 					sender.sendMessage(ChatUtils.chatMessage("&aAll kettles have been removed"));
 					return true;
-				} else if (args[1].equals("remove")) {
+				} else if (args.length < 5 && args[1].toLowerCase().equals("remove")) {
 					sender.sendMessage(
 							ChatUtils.translateToColor("&aProper Usage: &6/teas &ekettles remove <x> <y> <z>"));
-					return false;
-				}
-			} else if (args.length == 5 && args[1].equals("remove")) {
-				int x, y, z;
-				try {
-					x = Integer.parseInt(args[2]);
-				} catch (NumberFormatException e) {
-					sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid x coordinate"));
-					return false;
-				}
-				try {
-					y = Integer.parseInt(args[3]);
-				} catch (NumberFormatException e) {
-					sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid y coordinate"));
-					return false;
-				}
-				try {
-					z = Integer.parseInt(args[4]);
-				} catch (NumberFormatException e) {
-					sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid z coordinate"));
-					return false;
-				}
-				if (!(sender instanceof Player)) {
-					sender.sendMessage(ChatUtils.chatMessage("&cThis command can only be executed by a player!"));
-					return false;
-				} else {
-					Location location = new Location(((Player) sender).getWorld(), x, y, z);
-					Kettle kettle = KettleUtils.getKettle(location);
-					if (kettle != null) {
-						sender.sendMessage(ChatUtils.chatMessage(
-								"&7The kettle at &fx: " + x + " | y: " + y + " | z: " + z + " &7has been deleted"));
-						if (location.getChunk().isLoaded()) {
-							if (kettle.getHasBottle()) {
-								location.getWorld().dropItemNaturally(location,
-										new ItemStack(Material.GLASS_BOTTLE, 1));
-							} else if (kettle.getHasTeaBag()) {
-								location.getWorld().dropItemNaturally(location, TeaBag
-										.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
-							}
-						}
-						KettleUtils.removeKettle(location);
-						return true;
-					} else {
-						sender.sendMessage(ChatUtils.chatMessage(
-								"&cThere was no kettle found at this location! Note that you must be in the same world as the kettle in order for this command to work properly!"));
+					return true;
+				} else if (args.length >= 5 && args[1].toLowerCase().equals("remove")) {
+					int x, y, z;
+					try {
+						x = Integer.parseInt(args[2]);
+					} catch (NumberFormatException e) {
+						sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid x coordinate"));
 						return false;
+					}
+					try {
+						y = Integer.parseInt(args[3]);
+					} catch (NumberFormatException e) {
+						sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid y coordinate"));
+						return false;
+					}
+					try {
+						z = Integer.parseInt(args[4]);
+					} catch (NumberFormatException e) {
+						sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid z coordinate"));
+						return false;
+					}
+					if (!(sender instanceof Player)) {
+						sender.sendMessage(ChatUtils.chatMessage("&cThis command can only be executed by a player!"));
+						return false;
+					} else {
+						Location location = new Location(((Player) sender).getWorld(), x, y, z);
+						Kettle kettle = KettleUtils.getKettle(location);
+						if (kettle != null) {
+							sender.sendMessage(ChatUtils.chatMessage(
+									"&7The kettle at &fx: " + x + " | y: " + y + " | z: " + z + " &7has been deleted"));
+							if (location.getChunk().isLoaded()) {
+								if (kettle.getHasBottle()) {
+									location.getWorld().dropItemNaturally(location,
+											new ItemStack(Material.GLASS_BOTTLE, 1));
+								} else if (kettle.getHasTeaBag()) {
+									location.getWorld().dropItemNaturally(location, TeaBag
+											.getTeaBag(Items.valueOf(ItemUtils.getTeaName(kettle.getTea()) + "_TEA")));
+								}
+							}
+							KettleUtils.removeKettle(location);
+							return true;
+						} else {
+							sender.sendMessage(ChatUtils.chatMessage(
+									"&cThere was no kettle found at this location! Note that you must be in the same world as the kettle in order for this command to work properly!"));
+							return false;
+						}
 					}
 				}
 			}
@@ -200,19 +201,20 @@ public class CommandTeas implements CommandExecutor {
 			sender.sendMessage(
 					ChatUtils.translateToColor("&aProper Usage: &6/teas &ekettles <display | remove | removeall>"));
 			return false;
-		} else if (args[0].equals("plants")) {
+
+		} else if (args[0].toLowerCase().equals("plants")) {
 			if (!sender.hasPermission("irohsteas.admin.plants")) {
 				sender.sendMessage(ChatUtils.chatMessage("&cYou do not have permission to use this command!"));
 				return false;
 			}
-			if (args.length == 2) {
+			if (args.length >= 2) {
 				@SuppressWarnings("unchecked")
 				Map<Location, Boolean> locationToPlant = (Map<Location, Boolean>) TeaPlantUtils.getLocationToPlant()
 						.clone();
-				if (args[1].equals("display")) {
+				if (args[1].toLowerCase().equals("display")) {
 					sender.sendMessage(ChatUtils.translateToColor("&a         - - &2&lTea Plants &a- -"));
 					if (locationToPlant.size() == 0) {
-						sender.sendMessage(ChatUtils.chatMessage("&7There are currently no tea plants"));
+						sender.sendMessage(ChatUtils.translateToColor("&7There are currently no tea plants"));
 						return true;
 					}
 					int i = 1;
@@ -228,7 +230,7 @@ public class CommandTeas implements CommandExecutor {
 						i++;
 					}
 					return true;
-				} else if (args[1].equals("removeall")) {
+				} else if (args[1].toLowerCase().equals("removeall")) {
 					if (locationToPlant.size() == 0) {
 						sender.sendMessage(ChatUtils.chatMessage("&7There are currently no tea plants"));
 						return false;
@@ -248,53 +250,53 @@ public class CommandTeas implements CommandExecutor {
 					}
 					sender.sendMessage(ChatUtils.chatMessage("&aAll tea plants have been removed"));
 					return true;
-				} else if (args[1].equals("remove")) {
+				} else if (args.length < 5 && args[1].toLowerCase().equals("remove")) {
 					sender.sendMessage(
 							ChatUtils.translateToColor("&aProper Usage: &6/teas &eplants remove <x> <y> <z>"));
-					return false;
-				}
-			} else if (args.length == 5 && args[1].equals("remove")) {
-				int x, y, z;
-				try {
-					x = Integer.parseInt(args[2]);
-				} catch (NumberFormatException e) {
-					sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid x coordinate"));
-					return false;
-				}
-				try {
-					y = Integer.parseInt(args[3]);
-				} catch (NumberFormatException e) {
-					sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid y coordinate"));
-					return false;
-				}
-				try {
-					z = Integer.parseInt(args[4]);
-				} catch (NumberFormatException e) {
-					sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid z coordinate"));
-					return false;
-				}
-				if (!(sender instanceof Player)) {
-					sender.sendMessage(ChatUtils.chatMessage("&cThis command can only be executed by a player!"));
-					return false;
-				} else {
-					Location location = new Location(((Player) sender).getWorld(), x, y, z);
-					if (TeaPlantUtils.isPlant(location)) {
-						sender.sendMessage(ChatUtils.chatMessage(
-								"&7The tea plant at &fx: " + x + " | y: " + y + " | z: " + z + " &7has been deleted"));
-						if (location.getChunk().isLoaded()) {
-							boolean isGrown = TeaPlantUtils.isPlantGrown(location);
-							if (isGrown) {
-								TeaPlantHarvest.harvestTeaPlant(location.getBlock(), location);
-							} else {
-								location.getWorld().dropItemNaturally(location, TeaPlant.getTeaPlant());
-							}
-						}
-						KettleUtils.removeKettle(location);
-						return true;
-					} else {
-						sender.sendMessage(ChatUtils.chatMessage(
-								"&cThere was no tea plant found at this location! Note that you must be in the same world as the kettle in order for this command to work properly!"));
+					return true;
+				} else if (args.length >= 5 && args[1].equals("remove")) {
+					int x, y, z;
+					try {
+						x = Integer.parseInt(args[2]);
+					} catch (NumberFormatException e) {
+						sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid x coordinate"));
 						return false;
+					}
+					try {
+						y = Integer.parseInt(args[3]);
+					} catch (NumberFormatException e) {
+						sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid y coordinate"));
+						return false;
+					}
+					try {
+						z = Integer.parseInt(args[4]);
+					} catch (NumberFormatException e) {
+						sender.sendMessage(ChatUtils.chatMessage("&cPlease enter a valid z coordinate"));
+						return false;
+					}
+					if (!(sender instanceof Player)) {
+						sender.sendMessage(ChatUtils.chatMessage("&cThis command can only be executed by a player!"));
+						return false;
+					} else {
+						Location location = new Location(((Player) sender).getWorld(), x, y, z);
+						if (TeaPlantUtils.isPlant(location)) {
+							sender.sendMessage(ChatUtils.chatMessage("&7The tea plant at &fx: " + x + " | y: " + y
+									+ " | z: " + z + " &7has been deleted"));
+							if (location.getChunk().isLoaded()) {
+								boolean isGrown = TeaPlantUtils.isPlantGrown(location);
+								if (isGrown) {
+									TeaPlantHarvest.harvestTeaPlant(location.getBlock(), location);
+								} else {
+									location.getWorld().dropItemNaturally(location, TeaPlant.getTeaPlant());
+								}
+							}
+							KettleUtils.removeKettle(location);
+							return true;
+						} else {
+							sender.sendMessage(ChatUtils.chatMessage(
+									"&cThere was no tea plant found at this location! Note that you must be in the same world as the kettle in order for this command to work properly!"));
+							return false;
+						}
 					}
 				}
 			}

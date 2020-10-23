@@ -26,7 +26,7 @@ public class GreenTeaRecipe {
 		ItemStack teaBag = TeaBag.getTeaBag(Items.GREEN_TEA);
 		ShapelessRecipe recipe = new ShapelessRecipe(nk, teaBag);
 		
-		recipe.addIngredient(1, Material.KELP);
+		recipe.addIngredient(1, Material.PAPER);
 		
         plugin.getServer().addRecipe(recipe);
 	}

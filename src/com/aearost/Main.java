@@ -21,8 +21,9 @@ import com.aearost.recipes.HoneyRoseTeaRecipe;
 import com.aearost.recipes.JasmineTeaRecipe;
 import com.aearost.recipes.MatchaTeaRecipe;
 import com.aearost.recipes.SuspiciousTeaRecipe;
-import com.aearost.recipes.TulipTeaRecipe;
 import com.aearost.recipes.T8TeaRecipe;
+import com.aearost.recipes.TeaBaseRecipe;
+import com.aearost.recipes.TulipTeaRecipe;
 import com.aearost.recipes.WhiteDragonTeaRecipe;
 import com.aearost.recipes.WhiteJadeTeaRecipe;
 import com.aearost.utils.ItemUtils;
@@ -50,6 +51,7 @@ public class Main extends JavaPlugin {
 		new CauldronDestroy(this);
 
 		// Crafting Recipes
+		new TeaBaseRecipe(this);
 		new AppleCinnamonTeaRecipe(this);
 		new ChamomileTeaRecipe(this);
 		new ChocolateTeaRecipe(this);

@@ -4,6 +4,7 @@ public enum Items {
 	// Basic Items
 	TEA_LEAF,
 	TEA_PLANT,
+	TEA_BASE,
 	
 	// Tea Bags
 	GREEN_TEA_BAG,

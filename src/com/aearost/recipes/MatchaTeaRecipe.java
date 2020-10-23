@@ -40,7 +40,7 @@ public class MatchaTeaRecipe {
 		leaves.add(Material.OAK_LEAVES);
 		leaves.add(Material.SPRUCE_LEAVES);
 		
-		recipe.addIngredient(3, Material.KELP);
+		recipe.addIngredient(3, Material.PAPER);
 		recipe.addIngredient(1, Material.SUGAR);
 		recipe.addIngredient(new MaterialChoice(leaves));
 		

@@ -24,4 +24,12 @@ public class ChatUtils {
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
 	
+	public static String stripColor(String msg) {
+		String colorStripped = ChatColor.stripColor(msg);
+		while (colorStripped.startsWith("&")) {
+			colorStripped = colorStripped.substring(2);
+		}
+		return colorStripped;
+	}
+	
 }

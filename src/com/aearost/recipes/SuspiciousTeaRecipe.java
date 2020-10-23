@@ -39,7 +39,7 @@ public class SuspiciousTeaRecipe {
 		tulips.add(Material.RED_TULIP);
 		tulips.add(Material.WHITE_TULIP);
 		
-		recipe.addIngredient(1, Material.KELP);
+		recipe.addIngredient(1, Material.PAPER);
 		recipe.addIngredient(1, Material.ALLIUM);
 		recipe.addIngredient(1, Material.BLUE_ORCHID);
 		recipe.addIngredient(1, Material.CORNFLOWER);

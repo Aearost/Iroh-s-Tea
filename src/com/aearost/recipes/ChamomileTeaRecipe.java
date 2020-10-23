@@ -26,7 +26,7 @@ public class ChamomileTeaRecipe {
 		ItemStack teaBag = TeaBag.getTeaBag(Items.CHAMOMILE_TEA);
 		ShapelessRecipe recipe = new ShapelessRecipe(nk, teaBag);
 		
-		recipe.addIngredient(1, Material.KELP);
+		recipe.addIngredient(1, Material.PAPER);
 		recipe.addIngredient(1, Material.TALL_GRASS);
 		recipe.addIngredient(1, Material.OXEYE_DAISY);
 		recipe.addIngredient(1, Material.WHEAT);

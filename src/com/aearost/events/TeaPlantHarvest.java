@@ -45,6 +45,8 @@ public class TeaPlantHarvest implements Listener {
 			if (e.getPlayer().getGameMode() == GameMode.SURVIVAL) {
 				e.setCancelled(true);
 				harvestTeaPlant(block, location);
+			} else {
+				TeaPlantUtils.removePlant(location);
 			}
 		} else if (TeaPlantUtils.isPlant(locationAbove)) {
 			harvestTeaPlant(locationAbove.getBlock(), locationAbove);
