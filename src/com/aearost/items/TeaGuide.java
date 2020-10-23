@@ -23,11 +23,14 @@ public class TeaGuide {
 		meta.setAuthor(ChatUtils.translateToColor("&8Uncle Iroh"));
 		ArrayList<String> pages = new ArrayList<String>();
 
-		// Maximum of 256 characters per page!
-		pages.add(ChatUtils.translateToColor(
-				"&l&nTea Leaves\n\n&rWithout a tea leaf, one cannot make tea!\n\nTo get these leaves, destroy tall grass for a chance of them being dropped like seeds, and use them as a crafting ingredient in tea bag recipes!"));
-		pages.add(ChatUtils.translateToColor(
-				"&l&nKettles\n\n&rTea cannot be brewed without a kettle.\n\nIn order to create one, you must use a cauldron and place a flame beneath it. Fill the cauldron with water, and right click it with an empty bottle and the tea bag of your choice!"));
+		// Intro Pages
+		pages.add(ChatUtils.translateToColor("\n\n&l  --+--+--+--+--\n\n&8&l    Iroh's Teas\n\n&r&l  --+--+--+--+--\n\n\n\n\n&r&7&oA guide to brewing tea"));
+		pages.add(ChatUtils.translateToColor("&l&nTea Leaves & Plants\n\n&rWithout tea leaves, one cannot make a proper tea base!\n\nWith enough luck, a tea plant may drop by foraging through grass - just like seeds! Once planted, it will flower and one will be able to harvest it for its leaves."));
+		pages.add(ChatUtils.translateToColor("&l&nTea Base\n\n&rIt's just an ordinary tea leaf until you add it to the recipe for a tea base.\n\nAll recipes for tea bags contain a tea base as an essential ingredient. Without it, you will not get tea."));
+		pages.add(ChatUtils.translateToColor("&l&nTea Base (cont'd)\n\n&rIt is crafted in an ordinary crafting table as shown below:\n\n\n   S       S = String\n\nP T P     T = Tea Leaf\n\n   P       P = Paper"));
+		pages.add(ChatUtils.translateToColor("&l&nKettles\n\n&rTo create a kettle, one must place a cauldron over a hot flame. Once that is done, fill the cauldron with water and you are ready to begin brewing your tea. Right click the kettle with an empty bottle and the tea bag of your choice!"));
+		
+		// Teas
 		pages.add(ChatUtils.translateToColor(
 				"&l&nGreen Tea\n\n&r&oSimple, yet delicious\n\n&rIngredients:\n- 1 tea leaf\n\nEffects:\n- Luck III (30s)"));
 		pages.add(ChatUtils.translateToColor(
