@@ -1,6 +1,9 @@
 name: IrohsTeas
 version: 1.0
 author: Aearost
-main: com.aearost.irohstea.Main
+main: com.aearost.Main
 api-version: 1.16
 description: Adds a variety of teas that grant the user with potion effects, both positive and negative ones. Inspired by Uncle Iroh's love for tea from the Avatar universe.
+commands:
+   teas:
+      description: All underlying commands regarding the plugin
