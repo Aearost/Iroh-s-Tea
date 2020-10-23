@@ -36,6 +36,7 @@ public class CommandTeas implements CommandExecutor {
 			sender.sendMessage(ChatUtils.translateToColor("&a         - - &2&lIroh's Teas &a- -"));
 			sender.sendMessage(ChatUtils.translateToColor("&6/teas &egive <player> <item> &7[amount]"));
 			sender.sendMessage(ChatUtils.translateToColor("&6/teas &eguide"));
+			sender.sendMessage(ChatUtils.translateToColor("&6/teas &ehelp"));
 			sender.sendMessage(ChatUtils.translateToColor("&6/teas &ekettles <display | remove | removeall>"));
 			sender.sendMessage(ChatUtils.translateToColor("&6/teas &eplants <display | remove | removeall>"));
 			return true;
@@ -308,6 +309,7 @@ public class CommandTeas implements CommandExecutor {
 		sender.sendMessage(ChatUtils.translateToColor("&a         - - &2&lIroh's Teas &a- -"));
 		sender.sendMessage(ChatUtils.translateToColor("&6/teas &egive <player> <item> &7[amount]"));
 		sender.sendMessage(ChatUtils.translateToColor("&6/teas &eguide"));
+		sender.sendMessage(ChatUtils.translateToColor("&6/teas &ehelp"));
 		sender.sendMessage(ChatUtils.translateToColor("&6/teas &ekettles <display | remove | removeall>"));
 		sender.sendMessage(ChatUtils.translateToColor("&6/teas &eplants <display | remove | removeall>"));
 		return false;

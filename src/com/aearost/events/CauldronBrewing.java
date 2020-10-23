@@ -18,6 +18,7 @@ import com.aearost.Main;
 import com.aearost.items.Items;
 import com.aearost.items.Kettle;
 import com.aearost.items.TeaBag;
+import com.aearost.items.TeaBase;
 import com.aearost.utils.ChatUtils;
 import com.aearost.utils.ItemUtils;
 import com.aearost.utils.KettleUtils;
@@ -179,7 +180,16 @@ public class CauldronBrewing implements Listener {
 	 * @return
 	 */
 	private boolean isTeaBag(ItemStack is) {
-		return is.getType() == Material.PAPER && is.getItemMeta().hasDisplayName() && is.getItemMeta().hasLore();
+		boolean isPaper = is.getType() == Material.PAPER;
+		if (!is.hasItemMeta()) {
+			return false;
+		}
+		boolean hasLore = is.getItemMeta().hasLore();
+		if (!hasLore) {
+			return false;
+		}
+		boolean isNotTeaBase = !ChatUtils.stripColor(is.getItemMeta().getLore().get(0)).equals(ChatUtils.stripColor(TeaBase.getLore()));
+		return isPaper && isNotTeaBase;
 	}
 
 	/**
