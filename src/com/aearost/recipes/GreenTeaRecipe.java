@@ -27,6 +27,7 @@ public class GreenTeaRecipe {
 		ShapelessRecipe recipe = new ShapelessRecipe(nk, teaBag);
 		
 		recipe.addIngredient(1, Material.PAPER);
+		recipe.addIngredient(1, Material.KELP);
 		
         plugin.getServer().addRecipe(recipe);
 	}
