@@ -3,6 +3,7 @@ version: 1.0
 author: Aearost
 main: com.aearost.irohsteas.Main
 api-version: 1.16
+depend: [Multiverse-Core]
 description: Adds a variety of teas that grant the user with potion effects, both positive and negative ones. Inspired by Uncle Iroh's love for tea from the Avatar universe.
 commands:
    teas:
